@@ -22,9 +22,9 @@ Support workers talk (or type) to get safety reminders, guided documentation que
 
 ## Live demo
 
-**Version:** 1.1.14 — *Light/dark theme icon toggle · landing photo hero & spotlight · speech-to-text care notes · training · webhooks*
+**Version:** 1.1.15 — *Landing hero video background (Pexels) · light/dark theme · speech-to-text care notes · training · webhooks*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.14**).
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.15**).
 
 | Space | Role | Links |
 |---|---|---|
@@ -32,6 +32,10 @@ There are **two** Hugging Face Spaces (same static build). The first attempt (`c
 | **careTalk** (mirror) | Same build | [Space](https://huggingface.co/spaces/0001AMA/careTalk) · [site](https://0001ama-caretalk.static.hf.space/) · [app](https://0001ama-caretalk.static.hf.space/app.html) |
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
+
+### Landing hero video (v1.1.15)
+
+The home page hero uses a looping muted video background ([Pexels 4053216](https://www.pexels.com/download/video/4053216/)), with a still poster for reduced-motion and before the video is ready.
 
 ### Theme (v1.1.14)
 

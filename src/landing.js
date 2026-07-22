@@ -167,24 +167,35 @@ function initSubscribeForm() {
   });
 }
 
-function initHeroSlides() {
-  const slides = [...document.querySelectorAll(".hero-slide")];
-  if (slides.length < 2) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+function initHeroVideo() {
+  const video = document.querySelector(".hero-video");
+  if (!video) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    video.removeAttribute("autoplay");
+    video.pause?.();
+    return;
+  }
 
-  let index = slides.findIndex((el) => el.classList.contains("is-active"));
-  if (index < 0) index = 0;
+  const markReady = () => video.classList.add("is-ready");
+  video.addEventListener("loadeddata", markReady, { once: true });
+  video.addEventListener("playing", markReady, { once: true });
 
-  window.setInterval(() => {
-    slides[index].classList.remove("is-active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("is-active");
-  }, 6200);
+  const tryPlay = () => {
+    const play = video.play?.();
+    if (play && typeof play.then === "function") {
+      play.then(markReady).catch(() => {
+        /* Autoplay blocked — poster stays visible */
+      });
+    }
+  };
+
+  if (video.readyState >= 2) markReady();
+  tryPlay();
 }
 
 if (typeof document !== "undefined") {
   initTheme();
-  initHeroSlides();
+  initHeroVideo();
   initSubscribeForm();
   initFeedbackForm();
 }

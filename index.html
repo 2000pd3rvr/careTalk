@@ -68,27 +68,24 @@
     <main>
       <section class="hero" aria-label="Introduction">
         <div class="hero-media" aria-hidden="true">
+          <video
+            class="hero-video"
+            poster="/images/hero-voice-nurse.jpg"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source src="/videos/hero-care-bg.mp4" type="video/mp4" />
+          </video>
           <img
-            class="hero-slide is-active"
+            class="hero-poster"
             src="/images/hero-voice-nurse.jpg"
             alt=""
             width="612"
             height="408"
             fetchpriority="high"
-          />
-          <img
-            class="hero-slide"
-            src="/images/care-team-handover.jpg"
-            alt=""
-            width="1600"
-            height="1067"
-          />
-          <img
-            class="hero-slide"
-            src="/images/carer-with-resident.jpg"
-            alt=""
-            width="1600"
-            height="1067"
           />
         </div>
         <div class="hero-scrim" aria-hidden="true"></div>
@@ -104,7 +101,7 @@
             <a class="btn btn-primary" href="./app.html">Try the live demo</a>
             <a class="btn btn-ghost" href="#spotlight">See the moments</a>
           </div>
-          <p class="version-pill">Version 1.1.14</p>
+          <p class="version-pill">Version 1.1.15</p>
         </div>
       </section>
 
@@ -362,7 +359,7 @@
     <footer class="site-footer">
       <div class="section-inner footer-row">
         <div>
-          <p>careTalk v1.1.14 · MIT</p>
+          <p>careTalk v1.1.15 · MIT</p>
           <p>
             <a href="./app.html">App</a>
             ·
