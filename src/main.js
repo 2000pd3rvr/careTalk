@@ -2501,6 +2501,17 @@ function isLocalResetHost() {
   return import.meta.env.DEV || h === "localhost" || h === "127.0.0.1";
 }
 
+/** Hugging Face Spaces / public static demo — never restore a prior session on load. */
+function isPublicDemoHost() {
+  const h = window.location.hostname || "";
+  return /\.hf\.space$/i.test(h) || /huggingface\.co$/i.test(h);
+}
+
+function clearDemoSession() {
+  signOutUser();
+  markTrainAuthed(false);
+}
+
 async function boot() {
   await bootstrapNativeShell();
   if (isLocalResetHost() && new URLSearchParams(window.location.search).get("reset") === "1") {
@@ -2513,6 +2524,8 @@ async function boot() {
       console.error("Device reset failed", err);
     }
   }
+  // Shared demo hosts keep sessionStorage across refresh; always require Sign in.
+  if (isPublicDemoHost()) clearDemoSession();
   ensureDefaultPin();
   if (loadUsers().length === 0) ensureDefaultAdminAccount();
   warmUpVoices();

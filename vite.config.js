@@ -48,6 +48,7 @@ export default defineConfig({
         ],
       },
       workbox: {
+        cacheId: "caretalk-v3",
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
         navigateFallback: "index.html",
       },

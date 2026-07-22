@@ -15,6 +15,37 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/src/style.css" />
+    <!-- Public demo (HF Spaces): always start signed out; once-bust stale PWA caches -->
+    <script>
+      (function () {
+        try {
+          var h = location.hostname || "";
+          var isDemo = /\.hf\.space$/i.test(h) || /huggingface\.co$/i.test(h);
+          if (!isDemo) return;
+          sessionStorage.removeItem("don.session.userId");
+          sessionStorage.removeItem("don.train.authed");
+          var flag = "don.demo.swBust.v3";
+          if (localStorage.getItem(flag) === "1") return;
+          localStorage.setItem(flag, "1");
+          if (!("serviceWorker" in navigator)) return;
+          navigator.serviceWorker
+            .getRegistrations()
+            .then(function (regs) {
+              return Promise.all(regs.map(function (r) { return r.unregister(); }));
+            })
+            .then(function () {
+              return caches.keys();
+            })
+            .then(function (keys) {
+              return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+            })
+            .then(function () {
+              location.reload();
+            })
+            .catch(function () {});
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <!-- Sign in / register (default first screen) -->
