@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Hearthnote</string>
+    <string name="title_activity_main">Hearthnote</string>
+    <string name="package_name">uk.co.hearthnote.app</string>
+    <string name="custom_url_scheme">uk.co.hearthnote.app</string>
+</resources>

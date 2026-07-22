@@ -1,0 +1,34 @@
+{
+  "appId": "uk.co.hearthnote.app",
+  "appName": "careTalk",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": true,
+      "backgroundColor": "#061114",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#061114"
+    },
+    "SpeechRecognition": {
+      "language": "en-GB",
+      "popup": false,
+      "maxResults": 1,
+      "partialResults": true
+    }
+  },
+  "ios": {
+    "contentInset": "automatic",
+    "preferredContentMode": "mobile",
+    "scheme": "Hearthnote"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}
