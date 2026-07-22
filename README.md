@@ -4,8 +4,7 @@ emoji: 🏥
 colorFrom: blue
 colorTo: indigo
 sdk: static
-app_build_command: npm install && npm run build
-app_file: dist/index.html
+app_file: index.html
 pinned: false
 license: mit
 short_description: Digital head nurse for adult care — voice guidance & reports
@@ -22,9 +21,9 @@ short_description: Digital head nurse for adult care — voice guidance & report
 ## Live demo
 
 - **Hugging Face Space (public):** https://huggingface.co/spaces/0001AMA/careTalk  
-- **Direct app URL:** https://0001ama-caretalk.hf.space  
+- **Direct app URL:** https://0001ama-caretalk.static.hf.space  
 
-Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
+Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Open the **direct app URL** (not only the iframe) if the mic is blocked. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
 
 **Default admin (first install / device reset):**
 
@@ -148,21 +147,17 @@ See [DEPLOY.md](./DEPLOY.md) for website / Play Store / App Store notes.
 
 ## Deploy
 
-### Hugging Face Spaces (this repo)
+### Hugging Face Spaces
 
-Configured as a **static** Space with build step:
-
-```yaml
-sdk: static
-app_build_command: npm install && npm run build
-app_file: dist/index.html
-```
-
-Push to the Space repo; HF builds and serves `dist/`.
+This Space is **static** and serves a pre-built Vite `dist/` (HF free static hosting — no build credits required). Rebuild locally with `npm run build`, then publish `dist/` contents plus this README.
 
 ### Other static hosts
 
 Deploy the `dist/` folder to Netlify, Vercel, Cloudflare Pages, S3, etc. HTTPS is required for microphone access.
+
+### GitHub
+
+Source: https://github.com/2000pd3rvr/careTalk
 
 ---
 
