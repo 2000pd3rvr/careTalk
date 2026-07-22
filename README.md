@@ -7,7 +7,7 @@ sdk: static
 app_file: index.html
 pinned: false
 license: mit
-short_description: AI book-keeping for health assistants — speech notes & webhooks
+short_description: AI book-keeping for health assistants & admins
 ---
 
 # careTalk
