@@ -8,6 +8,17 @@
     <meta name="apple-mobile-web-app-title" content="careTalk" />
     <link rel="icon" type="image/png" href="/icons/favicon.png" />
     <title>careTalk — Speak the care. Keep the notes.</title>
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("don.ui.theme");
+          if (t !== "light" && t !== "dark") {
+            t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,7 +35,7 @@
           if (!isDemo) return;
           sessionStorage.removeItem("don.session.userId");
           sessionStorage.removeItem("don.train.authed");
-          var appVer = "1.1.13";
+          var appVer = "1.1.14";
           var flag = "don.demo.appVer";
           if (localStorage.getItem(flag) === appVer) return;
           localStorage.setItem(flag, appVer);
@@ -49,6 +60,21 @@
     </script>
   </head>
   <body>
+    <button
+      type="button"
+      class="theme-toggle"
+      data-theme-toggle
+      aria-label="Switch to dark theme"
+      title="Dark theme"
+    >
+      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+      </svg>
+      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z" />
+      </svg>
+    </button>
     <!-- Sign in / register (default first screen) -->
     <div class="gate" id="userAuth" role="dialog" aria-labelledby="userAuthTitle">
       <div class="gate-card">

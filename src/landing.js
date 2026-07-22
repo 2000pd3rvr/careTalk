@@ -6,6 +6,7 @@ import {
   addSubscriber,
 } from "./subscribers.js";
 import { FEEDBACK_EMAIL, forwardMail } from "./mailForward.js";
+import { initTheme } from "./theme.js";
 
 const FEEDBACK_KEY = "caretalk.landing.feedback";
 
@@ -182,6 +183,7 @@ function initHeroSlides() {
 }
 
 if (typeof document !== "undefined") {
+  initTheme();
   initHeroSlides();
   initSubscribeForm();
   initFeedbackForm();

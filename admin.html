@@ -8,6 +8,17 @@
     <meta name="description" content="careTalk updates admin" />
     <link rel="icon" type="image/png" href="/icons/favicon.png" />
     <title>careTalk — updates</title>
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("don.ui.theme");
+          if (t !== "light" && t !== "dark") {
+            t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -23,13 +34,28 @@
         <span class="brand-name">careTalk</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          title="Dark theme"
+        >
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z" />
+          </svg>
+        </button>
         <a class="btn btn-ghost" href="./">Back to site</a>
       </nav>
     </header>
 
     <main class="section band">
       <div class="section-inner admin-wrap">
-        <p class="version-pill">Version <span data-app-version>1.1.13</span></p>
+        <p class="version-pill">Version <span data-app-version>1.1.14</span></p>
 
         <section id="adminLogin" class="admin-card" aria-labelledby="admin-login-title">
           <h1 id="admin-login-title">Updates access</h1>
@@ -57,7 +83,7 @@
               <h1 id="admin-panel-title">Subscribers</h1>
               <p class="lede">
                 <strong id="subscriberCount">0</strong> email(s) on this browser
-                · careTalk <span data-app-version>1.1.13</span>
+                · careTalk <span data-app-version>1.1.14</span>
               </p>
             </div>
             <div class="admin-actions">
@@ -94,7 +120,7 @@
 
     <footer class="site-footer">
       <div class="section-inner">
-        <p>careTalk ops · v<span data-app-version>1.1.13</span></p>
+        <p>careTalk ops · v<span data-app-version>1.1.14</span></p>
       </div>
     </footer>
 

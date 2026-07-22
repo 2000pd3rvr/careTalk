@@ -11,6 +11,7 @@ import {
   signOutUpdatesAdmin,
   subscribersToCsv,
 } from "./subscribers.js";
+import { initTheme } from "./theme.js";
 
 function escapeHtml(s) {
   return String(s || "")
@@ -81,6 +82,7 @@ function downloadCsv() {
 }
 
 function init() {
+  initTheme();
   const verEls = document.querySelectorAll("[data-app-version]");
   verEls.forEach((el) => {
     el.textContent = APP_VERSION;

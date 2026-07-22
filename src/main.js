@@ -7,6 +7,7 @@ import { createDialogueBrain } from "./dialogue.js";
 import { chatWithLocalLlm, probeOllama, getLlmSettings } from "./llm.js";
 import { trainFromUrl } from "./trainFromUrl.js";
 import { webTrainAllTopics, listWebTrainableTopics } from "./webTrain.js";
+import { initTheme } from "./theme.js";
 import {
   createTrainingIncident,
   reportTrainingGapToAgency,
@@ -2521,6 +2522,7 @@ function clearDemoSession() {
 
 async function boot() {
   await bootstrapNativeShell();
+  initTheme();
   if (isLocalResetHost() && new URLSearchParams(window.location.search).get("reset") === "1") {
     try {
       resetDonDeviceData();
