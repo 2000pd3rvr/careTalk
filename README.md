@@ -20,7 +20,7 @@ short_description: Digital head nurse for adult care — voice guidance & report
 
 ## Live demo
 
-**Version:** 1.1.0
+**Version:** 1.1.1
 
 - **Project page (share with agencies / homes):** https://0001ama-caretalk-demo.static.hf.space/  
 - **Open the app:** https://0001ama-caretalk-demo.static.hf.space/app.html  

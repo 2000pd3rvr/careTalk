@@ -24,7 +24,7 @@
           if (!isDemo) return;
           sessionStorage.removeItem("don.session.userId");
           sessionStorage.removeItem("don.train.authed");
-          var appVer = "1.1.0";
+          var appVer = "1.1.1";
           var flag = "don.demo.appVer";
           if (localStorage.getItem(flag) === appVer) return;
           localStorage.setItem(flag, appVer);
@@ -64,20 +64,13 @@
         <form id="signInForm" class="auth-form">
           <label>
             Email
-            <input id="signInEmail" type="text" inputmode="email" autocomplete="username" required placeholder="admin@don.local" />
+            <input id="signInEmail" type="text" inputmode="email" autocomplete="username" required placeholder="you@example.com" />
           </label>
           <label>
             Password
             <input id="signInPassword" type="password" autocomplete="current-password" required />
           </label>
           <button type="submit" class="primary-btn">Sign in</button>
-          <p class="hint">
-            Test admin:
-            <strong>admin@don.local</strong> / <strong>2473</strong>
-            — only after
-            <button type="button" class="linkish" id="btnRecoverDefaultAdmin">restore default admin</button>
-            on this device.
-          </p>
         </form>
         <form id="registerForm" class="auth-form hidden">
           <label>
