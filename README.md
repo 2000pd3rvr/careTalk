@@ -7,7 +7,7 @@ sdk: static
 app_file: index.html
 pinned: false
 license: mit
-short_description: Speech-to-text care notes with custom training & live webhooks
+short_description: Speech-to-text care notes, training & live webhooks
 ---
 
 # careTalk
