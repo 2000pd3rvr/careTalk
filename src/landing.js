@@ -1,8 +1,12 @@
 /**
- * Landing-page feedback for care assistants & supervisors (device-local + GitHub issue).
+ * Landing page: feedback + subscribe for updates.
  */
+import {
+  APP_VERSION,
+  addSubscriber,
+} from "./subscribers.js";
+
 const FEEDBACK_KEY = "caretalk.landing.feedback";
-const APP_VERSION = "1.1.3";
 const ISSUE_URL = "https://github.com/2000pd3rvr/careTalk/issues/new";
 
 function readFeedback() {
@@ -135,4 +139,37 @@ function initFeedbackForm() {
   });
 }
 
+function initSubscribeForm() {
+  const form = document.getElementById("subscribeForm");
+  const status = document.getElementById("subscribeStatus");
+  if (!form) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const email = String(data.get("email") || "").trim();
+    const name = String(data.get("name") || "").trim();
+    const result = addSubscriber({ email, name, source: "landing" });
+
+    if (!result.ok) {
+      if (status) {
+        status.hidden = false;
+        status.className = "feedback-status error";
+        status.textContent = result.error;
+      }
+      return;
+    }
+
+    form.reset();
+    if (status) {
+      status.hidden = false;
+      status.className = "feedback-status ok";
+      status.textContent = result.created
+        ? "You’re on the list — we’ll use this email for careTalk update notes on this device."
+        : "You’re already subscribed with that email on this device.";
+    }
+  });
+}
+
+initSubscribeForm();
 initFeedbackForm();
