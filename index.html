@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <!-- Sign in / register -->
-    <div class="gate hidden" id="userAuth" role="dialog" aria-labelledby="userAuthTitle">
+    <!-- Sign in / register (default first screen) -->
+    <div class="gate" id="userAuth" role="dialog" aria-labelledby="userAuthTitle">
       <div class="gate-card">
         <div class="gate-brand">
           <div class="avatar" aria-hidden="true">C</div>
@@ -92,8 +92,8 @@
       </div>
     </div>
 
-    <!-- Mode gate: Train, Talk to careTalk, or Reports -->
-    <div class="gate" id="modeGate" role="dialog" aria-labelledby="gateTitle">
+    <!-- Mode gate: shown after sign-in -->
+    <div class="gate hidden" id="modeGate" role="dialog" aria-labelledby="gateTitle">
       <div class="gate-card">
         <div class="gate-brand">
           <div class="avatar" aria-hidden="true">C</div>

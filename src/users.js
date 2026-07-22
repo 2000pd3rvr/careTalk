@@ -465,7 +465,7 @@ export function ensureDefaultAdminAccount({ repairPassword = false } = {}) {
   if (list.length === 0) {
     const user = buildDefaultAdminRow();
     saveUsers([user]);
-    setCurrentUserId(user.id);
+    // Do not auto-sign-in — visitor must use Sign in / Register
     return { user: publicUser(user), created: true, credentials: { ...DEFAULT_ADMIN } };
   }
 
@@ -518,6 +518,6 @@ export function resetUsersToDefaultAdmin({ skipAuth = false } = {}) {
   user.createdAt = now;
   user.approvedAt = now;
   saveUsers([user]);
-  setCurrentUserId(user.id);
+  setCurrentUserId("");
   return { user: publicUser(user), credentials: { ...DEFAULT_ADMIN } };
 }

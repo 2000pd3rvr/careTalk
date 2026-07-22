@@ -1698,13 +1698,14 @@ function enterGate({ force = false } = {}) {
   markTrainAuthed(false);
   pendingMode = null;
   void stopMicQuiet();
+  // Seed default admin account for recovery credentials — never auto-login
+  if (loadUsers().length === 0) ensureDefaultAdminAccount();
   refreshGateSession();
-  showOnly("gate");
-  // First install: create default admin and sign in (no register wall)
-  if (!force && !getCurrentUser() && loadUsers().length === 0) {
-    ensureDefaultAdminAccount();
-    refreshGateSession();
+  if (!getCurrentUser()) {
+    enterUserAuth({ tab: "signin" });
+    return;
   }
+  showOnly("gate");
 }
 
 async function enterLearn() {
@@ -1987,10 +1988,13 @@ document.getElementById("btnRecoverDefaultAdmin")?.addEventListener("click", () 
       els.userAuthPending.hidden = true;
       els.userAuthPending.textContent = "";
     }
-    toast(`Restored ${r.credentials.email} — you are signed in`);
+    toast(`Restored ${r.credentials.email} — sign in with password ${r.credentials.password}`);
     refreshGateSession();
-    enterGate({ force: true });
-    continuePendingMode();
+    enterUserAuth({ tab: "signin" });
+    if (els.userAuthPending) {
+      els.userAuthPending.hidden = false;
+      els.userAuthPending.textContent = `Default admin ready: ${r.credentials.email} / ${r.credentials.password}`;
+    }
   } catch (err) {
     toast(err?.message || "Could not restore default admin");
   }
