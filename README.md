@@ -20,13 +20,17 @@ short_description: Digital head nurse for adult care — voice guidance & report
 
 ## Live demo
 
-**Version:** 1.1.1
+**Version:** 1.1.2
 
 - **Project page (share with agencies / homes):** https://0001ama-caretalk-demo.static.hf.space/  
 - **Open the app:** https://0001ama-caretalk-demo.static.hf.space/app.html  
 - **Hugging Face Space:** https://huggingface.co/spaces/0001AMA/careTalk-demo  
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
+
+### Feedback (v1.1.2)
+
+On the [project landing page](https://0001ama-caretalk-demo.static.hf.space/#feedback), care assistants and supervisors can share how careTalk might help on shift or in oversight. Notes are saved on the device and open a GitHub feedback draft.
 
 **Default admin (first install / device reset):**
 

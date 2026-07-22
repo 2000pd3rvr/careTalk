@@ -379,6 +379,166 @@ a {
   margin-top: 1.25rem;
 }
 
+.feedback-form {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.25rem;
+  max-width: 40rem;
+}
+
+.feedback-roles {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.feedback-roles legend {
+  margin: 0 0 0.55rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.role-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.role-option:last-of-type {
+  border-bottom: 0;
+}
+
+.role-option input {
+  margin-top: 0.2rem;
+  accent-color: var(--accent-deep);
+}
+
+.feedback-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .feedback-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.feedback-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.feedback-form .optional {
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 500;
+}
+
+.feedback-form textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  outline: 2px solid rgba(var(--accent-rgb), 0.35);
+  outline-offset: 1px;
+  border-color: rgba(var(--accent-rgb), 0.55);
+}
+
+.feedback-actions {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+}
+
+.feedback-status {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.feedback-status.ok {
+  color: #1f6a45;
+}
+
+.feedback-status.error {
+  color: #9b2c2c;
+}
+
+.feedback-wall-wrap {
+  margin-top: 2.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.feedback-wall-title {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.feedback-wall-empty {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+}
+
+.feedback-wall {
+  margin-top: 1.15rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.feedback-item {
+  padding: 0 0 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.feedback-item:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.feedback-meta {
+  margin: 0;
+  color: var(--accent-deep);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.feedback-body {
+  margin: 0.35rem 0 0;
+  color: var(--ink);
+}
+
+.feedback-who {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .site-footer {
   padding: 1.5rem clamp(1rem, 4vw, 2.5rem) 2rem;
   border-top: 1px solid var(--line);
