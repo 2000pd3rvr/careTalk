@@ -20,15 +20,18 @@ short_description: Digital head nurse for adult care — voice guidance & report
 
 ## Live demo
 
-**Version:** 1.1.2
+**Version:** 1.1.3
 
-- **Project page (share with agencies / homes):** https://0001ama-caretalk-demo.static.hf.space/  
-- **Open the app:** https://0001ama-caretalk-demo.static.hf.space/app.html  
-- **Hugging Face Space:** https://huggingface.co/spaces/0001AMA/careTalk-demo  
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.3** both host the identical release.
+
+| Space | Role | Links |
+|---|---|---|
+| **careTalk-demo** (primary) | Landing + app | [Space](https://huggingface.co/spaces/0001AMA/careTalk-demo) · [site](https://0001ama-caretalk-demo.static.hf.space/) · [app](https://0001ama-caretalk-demo.static.hf.space/app.html) |
+| **careTalk** (mirror) | Same build | [Space](https://huggingface.co/spaces/0001AMA/careTalk) · [site](https://0001ama-caretalk.static.hf.space/) · [app](https://0001ama-caretalk.static.hf.space/app.html) |
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
 
-### Feedback (v1.1.2)
+### Feedback (v1.1.3)
 
 On the [project landing page](https://0001ama-caretalk-demo.static.hf.space/#feedback), care assistants and supervisors can share how careTalk might help on shift or in oversight. Notes are saved on the device and open a GitHub feedback draft.
 
@@ -156,7 +159,14 @@ See [DEPLOY.md](./DEPLOY.md) for website / Play Store / App Store notes.
 
 ### Hugging Face Spaces
 
-This Space is **static** and serves a pre-built Vite `dist/` (HF free static hosting — no build credits required). Rebuild locally with `npm run build`, then publish `dist/` contents plus this README.
+Both Spaces are **static** and serve a pre-built Vite `dist/` (no HF build credits / no `app_build_command`).
+
+1. `npm run build`
+2. Publish `dist/` + a short Space `README.md` (YAML front matter only: `sdk: static`) to:
+   - `0001AMA/careTalk-demo` (primary)
+   - `0001AMA/careTalk` (mirror)
+
+Do **not** set `app_build_command` — that is what left `careTalk` on CONFIG_ERROR previously.
 
 ### Other static hosts
 

@@ -2,7 +2,7 @@
  * Landing-page feedback for care assistants & supervisors (device-local + GitHub issue).
  */
 const FEEDBACK_KEY = "caretalk.landing.feedback";
-const APP_VERSION = "1.1.2";
+const APP_VERSION = "1.1.3";
 const ISSUE_URL = "https://github.com/2000pd3rvr/careTalk/issues/new";
 
 function readFeedback() {
