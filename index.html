@@ -55,7 +55,7 @@
           <div class="hero-cta">
             <a class="btn btn-primary" href="./app.html">Try the live demo</a>
           </div>
-          <p class="version-pill">Version 1.1.10</p>
+          <p class="version-pill">Version 1.1.11</p>
         </div>
       </section>
 
@@ -165,70 +165,74 @@
       <section class="section band-alt" id="feedback" aria-labelledby="feedback-title">
         <div class="section-inner">
           <h2 id="feedback-title">Would careTalk help on your shift?</h2>
-          <p class="lede">
+          <p class="lede feedback-lede">
             Care assistants and supervisors — tell us how you think this could support your day-to-day work.
             Send feedback is emailed straight to the careTalk inbox (no mail app needed) and kept on this device.
           </p>
 
-          <form id="feedbackForm" class="feedback-form" novalidate>
-            <!-- Honeypot for bots — leave empty -->
-            <input
-              class="hp-field"
-              type="text"
-              name="_honey"
-              tabindex="-1"
-              autocomplete="off"
-              aria-hidden="true"
-            />
-            <fieldset class="feedback-roles">
-              <legend>I am mainly a…</legend>
-              <label class="role-option">
-                <input type="radio" name="role" value="assistant" required />
-                <span>Care assistant / support worker</span>
-              </label>
-              <label class="role-option">
-                <input type="radio" name="role" value="supervisor" />
-                <span>Supervisor / manager / nurse</span>
-              </label>
-              <label class="role-option">
-                <input type="radio" name="role" value="other" />
-                <span>Other / interested visitor</span>
-              </label>
-            </fieldset>
+          <div class="feedback-layout">
+            <form id="feedbackForm" class="feedback-form" novalidate>
+              <!-- Honeypot for bots — leave empty -->
+              <input
+                class="hp-field"
+                type="text"
+                name="_honey"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+              />
+              <fieldset class="feedback-roles">
+                <legend>I am mainly a…</legend>
+                <div class="feedback-roles-row">
+                  <label class="role-option">
+                    <input type="radio" name="role" value="assistant" required />
+                    <span>Care assistant / support worker</span>
+                  </label>
+                  <label class="role-option">
+                    <input type="radio" name="role" value="supervisor" />
+                    <span>Supervisor / manager / nurse</span>
+                  </label>
+                  <label class="role-option">
+                    <input type="radio" name="role" value="other" />
+                    <span>Other / interested visitor</span>
+                  </label>
+                </div>
+              </fieldset>
 
-            <div class="feedback-grid">
-              <label>
-                Name <span class="optional">(optional)</span>
-                <input id="feedbackName" name="name" type="text" autocomplete="name" maxlength="80" placeholder="First name" />
+              <div class="feedback-grid">
+                <label>
+                  Name <span class="optional">(optional)</span>
+                  <input id="feedbackName" name="name" type="text" autocomplete="name" maxlength="80" placeholder="First name" />
+                </label>
+                <label>
+                  Organisation <span class="optional">(optional)</span>
+                  <input id="feedbackOrg" name="org" type="text" autocomplete="organization" maxlength="120" placeholder="Home or agency" />
+                </label>
+              </div>
+
+              <label class="feedback-message">
+                How might careTalk help you?
+                <textarea
+                  id="feedbackMessage"
+                  name="message"
+                  required
+                  rows="5"
+                  maxlength="2000"
+                  placeholder="e.g. calmer guidance after a fall, clearer handover notes, training reminders for new staff…"
+                ></textarea>
               </label>
-              <label>
-                Organisation <span class="optional">(optional)</span>
-                <input id="feedbackOrg" name="org" type="text" autocomplete="organization" maxlength="120" placeholder="Home or agency" />
-              </label>
+
+              <div class="feedback-actions">
+                <button type="submit" class="btn btn-primary">Send feedback</button>
+                <p id="feedbackStatus" class="feedback-status" hidden></p>
+              </div>
+            </form>
+
+            <div class="feedback-wall-wrap">
+              <h3 class="feedback-wall-title">Notes left on this device</h3>
+              <p id="feedbackWallEmpty" class="feedback-wall-empty">No feedback saved here yet — be the first on this browser.</p>
+              <div id="feedbackWall" class="feedback-wall" aria-live="polite"></div>
             </div>
-
-            <label>
-              How might careTalk help you?
-              <textarea
-                id="feedbackMessage"
-                name="message"
-                required
-                rows="5"
-                maxlength="2000"
-                placeholder="e.g. calmer guidance after a fall, clearer handover notes, training reminders for new staff…"
-              ></textarea>
-            </label>
-
-            <div class="feedback-actions">
-              <button type="submit" class="btn btn-primary">Send feedback</button>
-              <p id="feedbackStatus" class="feedback-status" hidden></p>
-            </div>
-          </form>
-
-          <div class="feedback-wall-wrap">
-            <h3 class="feedback-wall-title">Notes left on this device</h3>
-            <p id="feedbackWallEmpty" class="feedback-wall-empty">No feedback saved here yet — be the first on this browser.</p>
-            <div id="feedbackWall" class="feedback-wall" aria-live="polite"></div>
           </div>
         </div>
       </section>
@@ -248,7 +252,7 @@
     <footer class="site-footer">
       <div class="section-inner footer-row">
         <div>
-          <p>careTalk v1.1.10 · MIT</p>
+          <p>careTalk v1.1.11 · MIT</p>
           <p>
             <a href="./app.html">App</a>
             ·
