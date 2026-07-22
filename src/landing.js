@@ -167,6 +167,34 @@ function initSubscribeForm() {
   });
 }
 
+function parseHeroPlaylist(video) {
+  const raw = video.getAttribute("data-hero-playlist");
+  if (!raw) return [];
+  try {
+    const list = JSON.parse(raw);
+    return Array.isArray(list) ? list.filter((c) => c && (c.cdn || c.local)) : [];
+  } catch {
+    return [];
+  }
+}
+
+function loadHeroClip(video, clip) {
+  while (video.firstChild) video.removeChild(video.firstChild);
+  if (clip.cdn) {
+    const cdn = document.createElement("source");
+    cdn.src = clip.cdn;
+    cdn.type = "video/mp4";
+    video.appendChild(cdn);
+  }
+  if (clip.local) {
+    const local = document.createElement("source");
+    local.src = clip.local;
+    local.type = "video/mp4";
+    video.appendChild(local);
+  }
+  video.load();
+}
+
 function initHeroVideo() {
   const video = document.querySelector(".hero-video");
   if (!video) return;
@@ -176,9 +204,12 @@ function initHeroVideo() {
     return;
   }
 
+  const playlist = parseHeroPlaylist(video);
+  let index = 0;
+
   const markReady = () => video.classList.add("is-ready");
-  video.addEventListener("loadeddata", markReady, { once: true });
-  video.addEventListener("playing", markReady, { once: true });
+  video.addEventListener("loadeddata", markReady);
+  video.addEventListener("playing", markReady);
 
   const tryPlay = () => {
     const play = video.play?.();
@@ -189,8 +220,27 @@ function initHeroVideo() {
     }
   };
 
-  if (video.readyState >= 2) markReady();
-  tryPlay();
+  const playClip = (i) => {
+    if (!playlist.length) {
+      tryPlay();
+      return;
+    }
+    index = ((i % playlist.length) + playlist.length) % playlist.length;
+    loadHeroClip(video, playlist[index]);
+    tryPlay();
+  };
+
+  if (playlist.length > 1) {
+    video.removeAttribute("loop");
+    video.addEventListener("ended", () => playClip(index + 1));
+    // Start on a random clip so return visits vary.
+    playClip(Math.floor(Math.random() * playlist.length));
+  } else {
+    if (playlist.length === 1) loadHeroClip(video, playlist[0]);
+    video.setAttribute("loop", "");
+    if (video.readyState >= 2) markReady();
+    tryPlay();
+  }
 }
 
 if (typeof document !== "undefined") {
