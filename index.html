@@ -24,7 +24,7 @@
           if (!isDemo) return;
           sessionStorage.removeItem("don.session.userId");
           sessionStorage.removeItem("don.train.authed");
-          var flag = "don.demo.swBust.v3";
+          var flag = "don.demo.swBust.v4";
           if (localStorage.getItem(flag) === "1") return;
           localStorage.setItem(flag, "1");
           if (!("serviceWorker" in navigator)) return;
@@ -119,7 +119,9 @@
           <button type="button" class="ghost-btn" id="btnResendCode">Resend code</button>
         </form>
         <p class="hint" id="userAuthPending" hidden></p>
-        <button type="button" class="ghost-btn" id="userAuthBack">Back to start</button>
+        <!-- Only shown when returning to the mode gate (already signed in) -->
+        <button type="button" class="ghost-btn" id="userAuthBack" hidden>Back</button>
+        <p class="tag auth-version" id="appVersion" hidden></p>
       </div>
     </div>
 

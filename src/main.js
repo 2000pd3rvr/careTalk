@@ -478,10 +478,17 @@ function requireModeAccess(mode) {
   return true;
 }
 
+function syncUserAuthBackVisibility() {
+  // Auth is the start screen when signed out — "Back" only makes sense from mode gate.
+  if (!els.userAuthBack) return;
+  els.userAuthBack.hidden = !getCurrentUser();
+}
+
 function enterUserAuth({ mode = null, tab = "signin" } = {}) {
   pendingMode = mode;
   void stopMicQuiet();
   showOnly("user");
+  syncUserAuthBackVisibility();
   const showReg = tab === "register";
   els.signInForm?.classList.toggle("hidden", showReg);
   els.registerForm?.classList.toggle("hidden", !showReg);
@@ -2528,6 +2535,11 @@ async function boot() {
   if (isPublicDemoHost()) clearDemoSession();
   ensureDefaultPin();
   if (loadUsers().length === 0) ensureDefaultAdminAccount();
+  const verEl = document.getElementById("appVersion");
+  if (verEl) {
+    verEl.hidden = false;
+    verEl.textContent = `v${DON_META.version}`;
+  }
   warmUpVoices();
   window.speechSynthesis?.addEventListener?.("voiceschanged", () => warmUpVoices());
   void refreshLlmStatus();

@@ -20,6 +20,9 @@ short_description: Digital head nurse for adult care — voice guidance & report
 
 ## Live demo
 
+**Version:** 1.0.1
+
+
 - **Hugging Face Space (public):** https://huggingface.co/spaces/0001AMA/careTalk-demo  
 - **Direct app URL (best for mic):** https://0001ama-caretalk-demo.static.hf.space  
 

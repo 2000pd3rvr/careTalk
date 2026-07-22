@@ -424,6 +424,13 @@ ul.record-review li {
   width: 100%;
 }
 
+#userAuth .auth-version {
+  margin: 0.75rem 0 0;
+  text-align: center;
+  opacity: 0.55;
+  font-size: 0.75rem;
+}
+
 #userAuth .linkish {
   background: none;
   border: none;

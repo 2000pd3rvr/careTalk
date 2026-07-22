@@ -10,6 +10,7 @@ import { visualsForAdvice } from "./visualGuides.js";
 export const DON_META = {
   name: "careTalk",
   fullName: "careTalk",
+  version: "1.0.1",
   tagline: "Your digital head nurse for adult care",
   disclaimer:
     "careTalk supports record-keeping and safe practice reminders. Follow your home’s policy, escalate to the nurse in charge, and call 999 in an emergency.",
