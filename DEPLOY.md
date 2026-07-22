@@ -99,5 +99,5 @@ npm run android:open   # or ios:open
 ## Notes
 
 - Speech: Web Speech API in browsers; Capacitor Speech Recognition on native
-- Notes are stored locally per device/user profile (not a clinical system of record)
+- Notes are stored locally per device/user profile
 - Before store submission, replace demo privacy copy with your organisation policy
