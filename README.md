@@ -20,11 +20,11 @@ short_description: Digital head nurse for adult care — voice guidance & report
 
 ## Live demo
 
-**Version:** 1.0.1
+**Version:** 1.1.0
 
-
-- **Hugging Face Space (public):** https://huggingface.co/spaces/0001AMA/careTalk-demo  
-- **Direct app URL (best for mic):** https://0001ama-caretalk-demo.static.hf.space  
+- **Project page (share with agencies / homes):** https://0001ama-caretalk-demo.static.hf.space/  
+- **Open the app:** https://0001ama-caretalk-demo.static.hf.space/app.html  
+- **Hugging Face Space:** https://huggingface.co/spaces/0001AMA/careTalk-demo  
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
 

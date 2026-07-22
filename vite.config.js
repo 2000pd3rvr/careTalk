@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import { resolve } from "node:path";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
@@ -12,10 +13,18 @@ export default defineConfig({
     host: true,
     port: 4173,
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "index.html"),
+        app: resolve(__dirname, "app.html"),
+      },
+    },
+  },
   plugins: [
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["icons/favicon.png"],
+      includeAssets: ["icons/favicon.png", "hero-care.svg"],
       manifest: {
         name: "careTalk",
         short_name: "careTalk",
@@ -24,7 +33,7 @@ export default defineConfig({
         background_color: "#f4f9ff",
         display: "standalone",
         orientation: "portrait-primary",
-        start_url: "./",
+        start_url: "./app.html",
         scope: "./",
         lang: "en-GB",
         categories: ["medical", "productivity", "business"],
@@ -48,9 +57,9 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Do not precache HTML — always fetch index.html from the network so
+        // Do not precache HTML — always fetch pages from the network so
         // demos pick up new releases (hashed JS/CSS still precached).
-        cacheId: "caretalk-v1.0.1",
+        cacheId: "caretalk-v1.1.0",
         globPatterns: ["**/*.{js,css,ico,png,svg,woff2}"],
         navigateFallback: null,
       },

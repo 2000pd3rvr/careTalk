@@ -4,330 +4,157 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#3b82d6" />
-    <meta name="description" content="careTalk — digital head nurse for adult care documentation and guidance." />
-    <meta name="apple-mobile-web-app-title" content="careTalk" />
+    <meta
+      name="description"
+      content="careTalk — a digital head nurse for UK adult care. Voice guidance, safer documentation prompts, and agency-ready reports for care homes and agencies."
+    />
+    <meta property="og:title" content="careTalk — Digital head nurse for adult care" />
+    <meta
+      property="og:description"
+      content="Help support workers get calm, practical guidance on the floor — and give managers clearer reports and home-specific knowledge."
+    />
+    <meta property="og:type" content="website" />
     <link rel="icon" type="image/png" href="/icons/favicon.png" />
-    <title>careTalk — Digital head nurse</title>
+    <title>careTalk — for care agencies &amp; nursing homes</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,550;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/src/style.css" />
-    <!-- Public demo (HF Spaces): always start signed out; bust SW when app version changes -->
-    <script>
-      (function () {
-        try {
-          var h = location.hostname || "";
-          var isDemo = /\.hf\.space$/i.test(h) || /huggingface\.co$/i.test(h);
-          if (!isDemo) return;
-          sessionStorage.removeItem("don.session.userId");
-          sessionStorage.removeItem("don.train.authed");
-          var appVer = "1.0.1";
-          var flag = "don.demo.appVer";
-          if (localStorage.getItem(flag) === appVer) return;
-          localStorage.setItem(flag, appVer);
-          if (!("serviceWorker" in navigator)) return;
-          navigator.serviceWorker
-            .getRegistrations()
-            .then(function (regs) {
-              return Promise.all(regs.map(function (r) { return r.unregister(); }));
-            })
-            .then(function () {
-              return caches.keys();
-            })
-            .then(function (keys) {
-              return Promise.all(keys.map(function (k) { return caches.delete(k); }));
-            })
-            .then(function () {
-              location.reload();
-            })
-            .catch(function () {});
-        } catch (e) {}
-      })();
-    </script>
+    <link rel="stylesheet" href="/src/landing.css" />
   </head>
   <body>
-    <!-- Sign in / register (default first screen) -->
-    <div class="gate" id="userAuth" role="dialog" aria-labelledby="userAuthTitle">
-      <div class="gate-card">
-        <div class="gate-brand">
-          <div class="avatar" aria-hidden="true">C</div>
-          <h1 id="userAuthTitle">careTalk</h1>
-          <p class="tag">Registered users only</p>
-        </div>
-        <div class="user-auth-tabs" role="tablist">
-          <button type="button" class="reports-tab active" data-user-auth-tab="signin" aria-selected="true">Sign in</button>
-          <button type="button" class="reports-tab" data-user-auth-tab="register" aria-selected="false">Register</button>
-        </div>
-        <form id="signInForm" class="auth-form">
-          <label>
-            Email
-            <input id="signInEmail" type="text" inputmode="email" autocomplete="username" required placeholder="admin@don.local" />
-          </label>
-          <label>
-            Password
-            <input id="signInPassword" type="password" autocomplete="current-password" required />
-          </label>
-          <button type="submit" class="primary-btn">Sign in</button>
-          <p class="hint">
-            Test admin:
-            <strong>admin@don.local</strong> / <strong>2473</strong>
-            — only after
-            <button type="button" class="linkish" id="btnRecoverDefaultAdmin">restore default admin</button>
-            on this device.
-          </p>
-        </form>
-        <form id="registerForm" class="auth-form hidden">
-          <label>
-            Full name
-            <input id="regName" type="text" autocomplete="name" required />
-          </label>
-          <label>
-            Email
-            <input id="regEmail" type="email" autocomplete="email" required />
-          </label>
-          <label>
-            Password
-            <input id="regPassword" type="password" autocomplete="new-password" required minlength="4" />
-          </label>
-          <label>
-            Role request
-            <select id="regRole">
-              <option value="carer">Support worker / carer</option>
-              <option value="admin">Manager / nurse / supervisor (admin)</option>
-            </select>
-          </label>
-          <p class="hint" id="regHint">
-            Support workers: verify your email — you are approved automatically after that.
-            Admin access: verify email, then another admin must approve you.
-            The first account on this device becomes admin immediately.
-          </p>
-          <button type="submit" class="primary-btn">Register</button>
-        </form>
-        <form id="verifyEmailForm" class="auth-form hidden">
-          <p class="hint">We opened your email app with a 6-digit code. Enter it below to verify.</p>
-          <label>
-            Email
-            <input id="verifyEmail" type="email" autocomplete="email" required readonly />
-          </label>
-          <label>
-            Verification code
-            <input id="verifyCode" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required />
-          </label>
-          <button type="submit" class="primary-btn">Verify email</button>
-          <button type="button" class="ghost-btn" id="btnResendCode">Resend code</button>
-        </form>
-        <p class="hint" id="userAuthPending" hidden></p>
-        <!-- Only shown when returning to the mode gate (already signed in) -->
-        <button type="button" class="ghost-btn" id="userAuthBack" hidden>Back</button>
-        <p class="tag auth-version" id="appVersion" hidden></p>
-      </div>
-    </div>
+    <header class="site-header">
+      <a class="brand-lockup" href="./">
+        <span class="avatar" aria-hidden="true">C</span>
+        <span class="brand-name">careTalk</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a class="nav-about" href="#how">How it works</a>
+        <a class="btn btn-ghost" href="./app.html">Open the app</a>
+      </nav>
+    </header>
 
-    <!-- Mode gate: shown after sign-in -->
-    <div class="gate hidden" id="modeGate" role="dialog" aria-labelledby="gateTitle">
-      <div class="gate-card">
-        <div class="gate-brand">
-          <div class="avatar" aria-hidden="true">C</div>
-          <h1 id="gateTitle">careTalk</h1>
-          <p class="tag">Digital head nurse for adult care</p>
+    <main>
+      <section class="hero" aria-label="Introduction">
+        <div class="hero-media" aria-hidden="true">
+          <img src="/hero-care.svg" alt="" width="1440" height="900" />
         </div>
-        <div class="gate-session" id="gateSession">
-          <p class="hint" id="gateUserLine">Sign in required</p>
-          <button type="button" class="ghost-btn" id="btnSignOut" hidden>Sign out</button>
-          <button type="button" class="ghost-btn" id="btnOpenAuth">Sign in</button>
+        <div class="hero-scrim" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="hero-brand">careTalk</p>
+          <h1 class="hero-headline">A digital head nurse for the care floor</h1>
+          <p class="hero-lede">
+            Calm voice guidance, clearer documentation, and agency-ready notes — built for UK adult care homes and agencies.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="./app.html">Try the live demo</a>
+            <a class="btn btn-ghost" href="https://github.com/2000pd3rvr/careTalk">View on GitHub</a>
+          </div>
+          <p class="version-pill">Version 1.1.0</p>
         </div>
-        <p class="gate-ask">Choose how you want to use careTalk</p>
-        <div class="gate-actions">
-          <button type="button" class="gate-btn learn" id="btnLearnMode">
-            <strong>Talk to careTalk</strong>
-            <span>Carer help — speak to careTalk, voice notes &amp; agency reports</span>
-          </button>
-          <button type="button" class="gate-btn train" id="btnTrainMode">
-            <strong>Give careTalk more knowledge</strong>
-            <span>Head nurse — add knowledge (admin registration + PIN)</span>
-          </button>
-          <button type="button" class="gate-btn reports" id="btnReports">
-            <strong>Reports</strong>
-            <span>Reports, training gaps &amp; registrations</span>
-          </button>
-        </div>
-        <p class="hint" id="gateLockHint">Sign in or register — support workers verify email; admins need another admin.</p>
-      </div>
-    </div>
-
-    <!-- Reports -->
-    <div class="app hidden" id="reportsApp">
-      <header class="hero">
-        <div class="avatar" aria-hidden="true">C</div>
-        <div>
-          <h1>Reports</h1>
-          <p class="tag">Outbox, gaps, users &amp; registrations</p>
-        </div>
-        <button type="button" class="ghost-btn" id="reportsExit">Back</button>
-      </header>
-      <section class="reports-panel">
-        <div class="reports-tabs" role="tablist">
-          <button type="button" class="reports-tab active" data-reports-tab="all" aria-selected="true">All</button>
-          <button type="button" class="reports-tab" data-reports-tab="reports" aria-selected="false">Reports</button>
-          <button type="button" class="reports-tab" data-reports-tab="gaps" aria-selected="false">Gaps</button>
-          <button type="button" class="reports-tab" data-reports-tab="regs" aria-selected="false">Regs</button>
-          <button type="button" class="reports-tab" data-reports-tab="users" aria-selected="false">Users</button>
-        </div>
-        <p class="hint" id="reportsCount"></p>
-        <ul class="reports-list" id="reportsList"></ul>
-        <pre class="record reports-detail hidden" id="reportsDetail"></pre>
       </section>
-    </div>
 
-    <!-- Train auth -->
-    <div class="gate hidden" id="trainAuth" role="dialog" aria-labelledby="authTitle">
-      <div class="gate-card">
-        <h2 id="authTitle">Head nurse sign-in</h2>
-        <p class="tag">Enter your PIN to give careTalk more knowledge</p>
-        <form id="authForm" class="auth-form">
-          <label>
-            PIN
-            <input id="trainPin" type="password" inputmode="numeric" autocomplete="current-password" required />
-          </label>
-          <p class="hint" id="authHint">Default PIN on first install: 2473 — change it after sign-in.</p>
-          <button type="submit" class="primary-btn">Unlock — Give careTalk more knowledge</button>
-          <button type="button" class="ghost-btn" id="authBack">Back</button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Train workspace -->
-    <div class="app hidden" id="trainApp">
-      <header class="hero">
-        <div class="avatar" aria-hidden="true">C</div>
-        <div>
-          <h1>Train careTalk</h1>
-          <p class="tag">Head nurse knowledge studio</p>
+      <section class="section band" id="who" aria-labelledby="who-title">
+        <div class="section-inner">
+          <h2 id="who-title">Built for the people who deliver care</h2>
+          <p class="lede">
+            Share careTalk with managers and support workers who need practical help in the moment — not another heavy clinical system.
+          </p>
+          <div class="split">
+            <div>
+              <h3 class="sr-only">For support workers</h3>
+              <ul class="feature-list">
+                <li>
+                  <strong>For support workers</strong>
+                  <span>Say “Hi careTalk” and describe what’s happening. Get do / don’t reminders, then answer one documentation question at a time.</span>
+                </li>
+                <li>
+                  <strong>Voice notes &amp; live reports</strong>
+                  <span>Capture what mattered on shift and build a report as you speak — ready for handover or the agency.</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="sr-only">For managers and nurses</h3>
+              <ul class="feature-list">
+                <li>
+                  <strong>For managers, nurses &amp; supervisors</strong>
+                  <span>Review reports by category, approve registrations, and teach careTalk your home’s local practice.</span>
+                </li>
+                <li>
+                  <strong>Train from trusted sources</strong>
+                  <span>Pull guidance from UK care sources, or paste a policy URL, so answers stay closer to how your service works.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <button type="button" class="ghost-btn" id="trainExit">Exit</button>
-      </header>
+      </section>
 
-      <section class="train-panel">
-        <h2>Topics careTalk is familiar with</h2>
-        <p class="hint">Everything careTalk can draw on right now, with where it came from.</p>
-        <div class="topic-toolbar">
-          <label class="topic-search">
-            <span class="sr-only">Search topics</span>
-            <input
-              id="topicSearch"
-              type="search"
-              placeholder="Search topics…"
-              autocomplete="off"
-            />
-          </label>
-          <span id="topicCount" class="hint"></span>
+      <section class="section band-alt" id="how" aria-labelledby="how-title">
+        <div class="section-inner">
+          <h2 id="how-title">How a home can try it</h2>
+          <p class="lede">No install required for the web demo. Use Chrome or Edge and allow the microphone when prompted.</p>
+          <ol class="steps">
+            <li>
+              <strong>Open the demo</strong>
+              <p>Start on Sign in / Register. Use the test admin if you only want a quick look.</p>
+            </li>
+            <li>
+              <strong>Talk through a scenario</strong>
+              <p>Try a fall, swallow concern, or wellbeing note — careTalk guides the next safe step and the write-up.</p>
+            </li>
+            <li>
+              <strong>Review as a manager</strong>
+              <p>Open Reports and Give careTalk more knowledge to see how oversight and local training fit together.</p>
+            </li>
+          </ol>
+          <p class="privacy-note">
+            Data stays on the device (browser storage) unless you configure agency email or webhook forwarding.
+            careTalk supports documentation and reminders — it does not replace clinical assessment, your policies, or calling <strong>999</strong> in an emergency.
+          </p>
         </div>
-        <ul class="knowledge-list topic-catalog" id="topicCatalog"></ul>
+      </section>
 
-        <h2>Train from the web</h2>
-        <p class="hint">
-          careTalk searches trusted UK care sources (NHS, GOV.UK, SCIE, NICE, Skills for Care, and more) for each topic, then fetches and trains himself.
+      <section class="section cta-band" aria-labelledby="cta-title">
+        <div class="section-inner">
+          <h2 id="cta-title">Share careTalk with your agency or home</h2>
+          <p class="lede">Send this page to a manager, then open the live demo together on a quiet shift.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="./app.html">Open careTalk</a>
+            <a class="btn btn-ghost" href="https://huggingface.co/spaces/0001AMA/careTalk-demo">Hugging Face Space</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="section-inner">
+        <p>careTalk v1.1.0 · MIT · Not a clinical system of record</p>
+        <p>
+          <a href="./app.html">App</a>
+          ·
+          <a href="https://github.com/2000pd3rvr/careTalk">GitHub</a>
+          ·
+          <a href="https://0001ama-caretalk-demo.static.hf.space/">Live site</a>
         </p>
-        <div class="train-form">
-          <label class="check">
-            <input id="webTrainGapsOnly" type="checkbox" />
-            Gaps only (capabilities + untrained added topics) — otherwise train all topics
-          </label>
-          <button type="button" class="primary-btn" id="webTrainBtn">Search web &amp; train careTalk</button>
-        </div>
-        <div id="webTrainProgress" class="url-preview hidden"></div>
+      </div>
+    </footer>
 
-        <h2>Train from a single URL</h2>
-        <form id="urlTrainForm" class="train-form">
-          <label>
-            Knowledge URL
-            <input
-              id="kUrl"
-              type="url"
-              required
-              placeholder="https://www.gov.uk/… or a care-training page"
-            />
-          </label>
-          <p class="hint">Paste one page URL if you already know the source.</p>
-          <button type="submit" class="primary-btn" id="urlTrainBtn">Fetch &amp; train from URL</button>
-        </form>
-        <div id="urlTrainPreview" class="url-preview hidden"></div>
-
-        <h2>Add topic</h2>
-        <form id="topicForm" class="train-form">
-          <label>Topic name <input id="topicTitle" required placeholder="e.g. Medication refusal, Night-time falls" /></label>
-          <label>Keywords <input id="topicKeywords" placeholder="medicine, refuse, mar" /></label>
-          <label>Notes (optional) <textarea id="topicNotes" rows="2" placeholder="What careTalk should learn about…"></textarea></label>
-          <p class="hint">After you add a topic, use <strong>Fetch &amp; train</strong> on it (or Search web &amp; train careTalk) to pull up-to-date guidance.</p>
-          <button type="submit" class="primary-btn">Add topic</button>
-        </form>
-        <ul class="knowledge-list" id="customTopicList"></ul>
-
-        <h2>Unresolved training incidents</h2>
-        <p class="hint">When careTalk doesn’t know what to do, he logs a gap here and emails the agency.</p>
-        <ul class="knowledge-list" id="incidentList"></ul>
-
-        <h2>Agency forwarding</h2>
-        <form id="agencyForm" class="train-form">
-          <label>Agency name <input id="agencyName" placeholder="Sunrise Care Agency" /></label>
-          <label>Agency email <input id="agencyEmail" type="email" placeholder="reports@agency.example" /></label>
-          <label>Webhook URL (optional) <input id="agencyWebhook" type="url" placeholder="https://…" /></label>
-          <label class="check">
-            <input id="agencyAuto" type="checkbox" checked />
-            Auto-forward support worker reports from Talk to careTalk
-          </label>
-          <button type="submit" class="primary-btn">Save agency settings</button>
-        </form>
-
-        <h2>Change PIN</h2>
-        <form id="pinForm" class="train-form">
-          <label>New PIN <input id="newPin" type="password" inputmode="numeric" minlength="4" required /></label>
-          <button type="submit" class="primary-btn">Update PIN</button>
-        </form>
-
-        <h2>Home knowledge entries</h2>
-        <p class="hint">Custom items added in Give careTalk more knowledge (also listed in the catalogue above).</p>
-        <ul class="knowledge-list" id="knowledgeList"></ul>
-      </section>
-    </div>
-
-    <!-- Talk to careTalk / carer mode -->
-    <div class="app hidden" id="learnApp">
-      <header class="hero">
-        <div class="avatar" aria-hidden="true">C</div>
-        <div>
-          <h1>careTalk</h1>
-          <p class="tag">Talk to careTalk — carer help</p>
-        </div>
-        <label class="you">
-          Signed in as
-          <input id="carerName" value="" readonly placeholder="Sign in for your name" />
-        </label>
-        <button type="button" class="ghost-btn mode-switch" id="learnExit" title="Change mode">Modes</button>
-      </header>
-
-      <div class="chat" id="chat" aria-live="polite"></div>
-
-      <form class="dock" id="composer">
-        <button type="button" class="mic" id="micBtn" aria-label="Talk to careTalk" aria-pressed="false">🎤</button>
-        <input
-          id="input"
-          autocomplete="off"
-          placeholder='Try “careTalk, Meggie just fell…” or just “careTalk”'
-        />
-        <button type="submit" class="send" id="sendBtn">Send</button>
-      </form>
-      <p class="fine" id="statusLine">Say <strong>careTalk</strong> anytime. I’ll ask if you need help.</p>
-    </div>
-
-    <div class="toast" id="toast" role="status"></div>
-    <div class="lightbox hidden" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged guide image">
-      <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close">Close</button>
-      <img id="lightboxImg" alt="" />
-    </div>
-    <script type="module" src="/src/main.js"></script>
+    <style>
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
   </body>
 </html>
