@@ -48,9 +48,11 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // Do not precache HTML — always fetch index.html from the network so
+        // demos pick up new releases (hashed JS/CSS still precached).
         cacheId: "caretalk-v1.0.1",
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
-        navigateFallback: "index.html",
+        globPatterns: ["**/*.{js,css,ico,png,svg,woff2}"],
+        navigateFallback: null,
       },
     }),
   ],

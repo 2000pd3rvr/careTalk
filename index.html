@@ -15,7 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/src/style.css" />
-    <!-- Public demo (HF Spaces): always start signed out; once-bust stale PWA caches -->
+    <!-- Public demo (HF Spaces): always start signed out; bust SW when app version changes -->
     <script>
       (function () {
         try {
@@ -24,9 +24,10 @@
           if (!isDemo) return;
           sessionStorage.removeItem("don.session.userId");
           sessionStorage.removeItem("don.train.authed");
-          var flag = "don.demo.swBust.v4";
-          if (localStorage.getItem(flag) === "1") return;
-          localStorage.setItem(flag, "1");
+          var appVer = "1.0.1";
+          var flag = "don.demo.appVer";
+          if (localStorage.getItem(flag) === appVer) return;
+          localStorage.setItem(flag, appVer);
           if (!("serviceWorker" in navigator)) return;
           navigator.serviceWorker
             .getRegistrations()
