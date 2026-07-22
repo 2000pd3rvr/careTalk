@@ -7,7 +7,8 @@ import {
 } from "./subscribers.js";
 
 const FEEDBACK_KEY = "caretalk.landing.feedback";
-const ISSUE_URL = "https://github.com/2000pd3rvr/careTalk/issues/new";
+/** Inbox for every landing-page feedback submission (opens the device mail app). */
+export const FEEDBACK_EMAIL = "pd3rvr@icloud.com";
 
 function readFeedback() {
   try {
@@ -64,28 +65,43 @@ function renderWall(list) {
   if (empty) empty.hidden = items.length > 0;
 }
 
-function openGithubIssue(entry) {
-  const title = encodeURIComponent(
-    `[Feedback] ${roleLabel(entry.role)} — careTalk ${APP_VERSION}`,
+/** Build a mailto: URL so feedback is addressed to the project inbox. */
+export function buildFeedbackMailto(entry) {
+  const subject = encodeURIComponent(
+    `[careTalk feedback] ${roleLabel(entry.role)} — v${entry.version || APP_VERSION}`,
   );
   const body = encodeURIComponent(
     [
-      `## Visitor feedback (careTalk ${APP_VERSION})`,
+      `careTalk feedback (v${entry.version || APP_VERSION})`,
       "",
-      `**Role:** ${roleLabel(entry.role)}`,
-      entry.name ? `**Name:** ${entry.name}` : null,
-      entry.org ? `**Organisation:** ${entry.org}` : null,
+      `Role: ${roleLabel(entry.role)}`,
+      entry.name ? `Name: ${entry.name}` : null,
+      entry.org ? `Organisation: ${entry.org}` : null,
+      entry.at ? `Submitted: ${entry.at}` : null,
       "",
-      "### How careTalk might help",
-      entry.message,
+      "How careTalk might help:",
+      entry.message || "",
       "",
-      "_Submitted from the public landing page._",
+      "— Sent from the careTalk landing page",
     ]
       .filter((line) => line !== null)
       .join("\n"),
   );
-  const url = `${ISSUE_URL}?title=${title}&body=${body}&labels=feedback`;
-  window.open(url, "_blank", "noopener,noreferrer");
+  return `mailto:${FEEDBACK_EMAIL}?subject=${subject}&body=${body}`;
+}
+
+function openFeedbackEmail(entry) {
+  const mailto = buildFeedbackMailto(entry);
+  try {
+    const a = document.createElement("a");
+    a.href = mailto;
+    a.rel = "noopener";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  } catch {
+    window.location.href = mailto;
+  }
 }
 
 function initFeedbackForm() {
@@ -132,10 +148,10 @@ function initFeedbackForm() {
       status.hidden = false;
       status.className = "feedback-status ok";
       status.textContent =
-        "Thanks — your note is saved on this device. A GitHub feedback draft will open so we can read it.";
+        "Thanks — your note is saved on this device. Your email app will open so the message can be sent to pd3rvr@icloud.com.";
     }
 
-    openGithubIssue(entry);
+    openFeedbackEmail(entry);
   });
 }
 
@@ -171,5 +187,7 @@ function initSubscribeForm() {
   });
 }
 
-initSubscribeForm();
-initFeedbackForm();
+if (typeof document !== "undefined") {
+  initSubscribeForm();
+  initFeedbackForm();
+}
