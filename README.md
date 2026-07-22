@@ -22,9 +22,9 @@ Support workers talk (or type) to get safety reminders, guided documentation que
 
 ## Live demo
 
-**Version:** 1.1.9 — *Mail-forwarded landing feedback · speech-to-text care notes · training · webhooks*
+**Version:** 1.1.10 — *Landing CTA cleanup · mail-forwarded feedback · speech-to-text care notes · training · webhooks*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release.
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.10**).
 
 | Space | Role | Links |
 |---|---|---|
