@@ -22,9 +22,9 @@ Support workers talk (or type) to get safety reminders, guided documentation que
 
 ## Live demo
 
-**Version:** 1.1.7 — *Landing feedback emails · speech-to-text care notes · training · webhooks*
+**Version:** 1.1.8 — *Mail-forwarded landing feedback · speech-to-text care notes · training · webhooks*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.7** both host the identical release.
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.8** both host the identical release.
 
 | Space | Role | Links |
 |---|---|---|
@@ -33,11 +33,11 @@ There are **two** Hugging Face Spaces (same static build). The first attempt (`c
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
 
-### Feedback (v1.1.7)
+### Feedback (v1.1.8)
 
-On the [project landing page](https://0001ama-caretalk-demo.static.hf.space/#feedback), care assistants and supervisors can share how careTalk might help on shift or in oversight. Notes are saved on the device and open an email draft to **pd3rvr@icloud.com**.
+On the [project landing page](https://0001ama-caretalk-demo.static.hf.space/#feedback), care assistants and supervisors can share how careTalk might help on shift or in oversight. **Send feedback** posts through a mail-forwarding service straight to **pd3rvr@icloud.com** (no device mail app). A copy is also saved in this browser. The first live submission may require a one-time FormSubmit confirmation email to that inbox.
 
-### Subscribe for updates (v1.1.7)
+### Subscribe for updates (v1.1.8)
 
 Visitors can join an updates list on the landing page ([#subscribe](https://0001ama-caretalk-demo.static.hf.space/#subscribe)). Addresses are stored in browser `localStorage` on that device. A discreet lock icon in the footer opens a private updates admin screen (`admin.html`) to review / export the list — credentials are not published here.
 

@@ -56,7 +56,7 @@
             <a class="btn btn-primary" href="./app.html">Try the live demo</a>
             <a class="btn btn-ghost" href="https://github.com/2000pd3rvr/careTalk">View on GitHub</a>
           </div>
-          <p class="version-pill">Version 1.1.7</p>
+          <p class="version-pill">Version 1.1.8</p>
         </div>
       </section>
 
@@ -168,10 +168,19 @@
           <h2 id="feedback-title">Would careTalk help on your shift?</h2>
           <p class="lede">
             Care assistants and supervisors — tell us how you think this could support your day-to-day work.
-            Your note stays on this device and opens an email draft to <strong>pd3rvr@icloud.com</strong>.
+            Send feedback is emailed straight to the careTalk inbox (no mail app needed) and kept on this device.
           </p>
 
           <form id="feedbackForm" class="feedback-form" novalidate>
+            <!-- Honeypot for bots — leave empty -->
+            <input
+              class="hp-field"
+              type="text"
+              name="_honey"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+            />
             <fieldset class="feedback-roles">
               <legend>I am mainly a…</legend>
               <label class="role-option">
@@ -240,7 +249,7 @@
     <footer class="site-footer">
       <div class="section-inner footer-row">
         <div>
-          <p>careTalk v1.1.7 · MIT · Not a clinical system of record</p>
+          <p>careTalk v1.1.8 · MIT · Not a clinical system of record</p>
           <p>
             <a href="./app.html">App</a>
             ·

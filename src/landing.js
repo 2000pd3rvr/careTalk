@@ -5,10 +5,11 @@ import {
   APP_VERSION,
   addSubscriber,
 } from "./subscribers.js";
+import { FEEDBACK_EMAIL, forwardMail } from "./mailForward.js";
 
 const FEEDBACK_KEY = "caretalk.landing.feedback";
-/** Inbox for every landing-page feedback submission (opens the device mail app). */
-export const FEEDBACK_EMAIL = "pd3rvr@icloud.com";
+
+export { FEEDBACK_EMAIL };
 
 function readFeedback() {
   try {
@@ -65,67 +66,58 @@ function renderWall(list) {
   if (empty) empty.hidden = items.length > 0;
 }
 
-/** Build a mailto: URL so feedback is addressed to the project inbox. */
-export function buildFeedbackMailto(entry) {
-  const subject = encodeURIComponent(
-    `[careTalk feedback] ${roleLabel(entry.role)} — v${entry.version || APP_VERSION}`,
-  );
-  const body = encodeURIComponent(
-    [
-      `careTalk feedback (v${entry.version || APP_VERSION})`,
-      "",
-      `Role: ${roleLabel(entry.role)}`,
-      entry.name ? `Name: ${entry.name}` : null,
-      entry.org ? `Organisation: ${entry.org}` : null,
-      entry.at ? `Submitted: ${entry.at}` : null,
-      "",
-      "How careTalk might help:",
-      entry.message || "",
-      "",
-      "— Sent from the careTalk landing page",
-    ]
-      .filter((line) => line !== null)
-      .join("\n"),
-  );
-  return `mailto:${FEEDBACK_EMAIL}?subject=${subject}&body=${body}`;
+/** Fields posted to the mail forwarder (also used as email body content). */
+export function buildFeedbackMailFields(entry) {
+  return {
+    form: "careTalk landing feedback",
+    version: String(entry.version || APP_VERSION),
+    role: roleLabel(entry.role),
+    name: entry.name || "(not given)",
+    organisation: entry.org || "(not given)",
+    submitted_at: entry.at || new Date().toISOString(),
+    message: entry.message || "",
+  };
 }
 
-function openFeedbackEmail(entry) {
-  const mailto = buildFeedbackMailto(entry);
-  try {
-    const a = document.createElement("a");
-    a.href = mailto;
-    a.rel = "noopener";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  } catch {
-    window.location.href = mailto;
-  }
+function setFeedbackStatus(statusEl, { ok, text }) {
+  if (!statusEl) return;
+  statusEl.hidden = false;
+  statusEl.className = `feedback-status ${ok ? "ok" : "error"}`;
+  statusEl.textContent = text;
 }
 
 function initFeedbackForm() {
   const form = document.getElementById("feedbackForm");
   const status = document.getElementById("feedbackStatus");
+  const submitBtn = form?.querySelector('button[type="submit"]');
   if (!form) return;
 
   renderWall(readFeedback());
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const data = new FormData(form);
     const role = String(data.get("role") || "").trim();
     const message = String(data.get("message") || "").trim();
     const name = String(data.get("name") || "").trim();
     const org = String(data.get("org") || "").trim();
+    // Honeypot — bots fill this; humans never see it
+    const honey = String(data.get("_honey") || "").trim();
+
+    if (honey) {
+      setFeedbackStatus(status, {
+        ok: true,
+        text: "Thanks — your note was sent.",
+      });
+      form.reset();
+      return;
+    }
 
     if (!role || message.length < 12) {
-      if (status) {
-        status.hidden = false;
-        status.className = "feedback-status error";
-        status.textContent =
-          "Please choose your role and write at least a short note (12+ characters).";
-      }
+      setFeedbackStatus(status, {
+        ok: false,
+        text: "Please choose your role and write at least a short note (12+ characters).",
+      });
       return;
     }
 
@@ -139,19 +131,46 @@ function initFeedbackForm() {
       message,
     };
 
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+    }
+    setFeedbackStatus(status, { ok: true, text: "Sending your feedback…" });
+
+    const result = await forwardMail({
+      subject: `[careTalk feedback] ${roleLabel(entry.role)} — v${entry.version}`,
+      fields: buildFeedbackMailFields(entry),
+    });
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send feedback";
+    }
+
+    if (!result.ok) {
+      // Still keep a local copy so the note isn’t lost on this device
+      const list = [entry, ...readFeedback()];
+      writeFeedback(list);
+      renderWall(list);
+      setFeedbackStatus(status, {
+        ok: false,
+        text:
+          result.error?.includes("confirm") || result.error?.includes("Activation")
+            ? "Almost there — check pd3rvr@icloud.com for a one-time FormSubmit confirmation, then send again."
+            : `Saved on this device, but email send failed (${result.error || "unknown error"}). Please try again.`,
+      });
+      return;
+    }
+
     const list = [entry, ...readFeedback()];
     writeFeedback(list);
     renderWall(list);
     form.reset();
 
-    if (status) {
-      status.hidden = false;
-      status.className = "feedback-status ok";
-      status.textContent =
-        "Thanks — your note is saved on this device. Your email app will open so the message can be sent to pd3rvr@icloud.com.";
-    }
-
-    openFeedbackEmail(entry);
+    setFeedbackStatus(status, {
+      ok: true,
+      text: "Thanks — your feedback was emailed to the careTalk inbox and saved on this device.",
+    });
   });
 }
 

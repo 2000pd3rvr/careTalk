@@ -545,6 +545,18 @@ a {
   max-width: 40rem;
 }
 
+/* Bot honeypot — visually hidden, not focusable via CSS alone (tabindex=-1 in HTML) */
+.hp-field {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .feedback-roles {
   margin: 0;
   padding: 0;
