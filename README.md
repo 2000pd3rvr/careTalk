@@ -7,12 +7,12 @@ sdk: static
 app_file: index.html
 pinned: false
 license: mit
-short_description: Speech-to-text care notes, training & live webhooks
+short_description: AI book-keeping for health assistants — speech notes & webhooks
 ---
 
 # careTalk
 
-**careTalk** is a speech-to-text care assistant for UK adult social care. It learns your home’s **custom care training and documentation**, then turns carers’ **informal speech** into clear notes for **record-keeping**. Live **webhooks** let supervisors receive and view on-site information as carers create records.
+**careTalk** uses artificial intelligence to improve book-keeping for health assistants and admins. It learns your home’s **custom care training and documentation**, then turns carers’ **informal speech** into clear notes for **record-keeping**. Live **webhooks** let supervisors receive and view on-site information as carers create records.
 
 Support workers talk (or type) to get safety reminders, guided documentation questions, and agency-ready reports — with manager tools to approve users, review reports, and teach careTalk home-specific knowledge.
 
@@ -22,9 +22,9 @@ Support workers talk (or type) to get safety reminders, guided documentation que
 
 ## Live demo
 
-**Version:** 1.1.16 — *Landing hero video playlist (Pexels) · light/dark theme · speech-to-text care notes · training · webhooks*
+**Version:** 1.1.17 — *AI book-keeping positioning · Landing hero video playlist (Pexels) · light/dark theme · speech-to-text care notes · training · webhooks*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.16**).
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.17**).
 
 | Space | Role | Links |
 |---|---|---|
@@ -32,6 +32,10 @@ There are **two** Hugging Face Spaces (same static build). The first attempt (`c
 | **careTalk** (mirror) | Same build | [Space](https://huggingface.co/spaces/0001AMA/careTalk) · [site](https://0001ama-caretalk.static.hf.space/) · [app](https://0001ama-caretalk.static.hf.space/app.html) |
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
+
+### Positioning (v1.1.17)
+
+Landing copy emphasises AI-assisted book-keeping for health assistants and admins, plus custom training, speech-to-notes, and live supervisor webhooks.
 
 ### Landing hero videos (v1.1.16)
 
