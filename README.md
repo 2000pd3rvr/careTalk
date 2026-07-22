@@ -22,9 +22,9 @@ Support workers talk (or type) to get safety reminders, guided documentation que
 
 ## Live demo
 
-**Version:** 1.1.11 — *Feedback section full-width layout · mail-forwarded feedback · speech-to-text care notes · training · webhooks*
+**Version:** 1.1.12 — *Remove on-device feedback notes wall · mail-forwarded feedback · speech-to-text care notes · training · webhooks*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.11**).
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.12**).
 
 | Space | Role | Links |
 |---|---|---|
@@ -33,9 +33,9 @@ There are **two** Hugging Face Spaces (same static build). The first attempt (`c
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
 
-### Feedback (v1.1.11)
+### Feedback (v1.1.12)
 
-On the [project landing page](https://0001ama-caretalk-demo.static.hf.space/#feedback), care assistants and supervisors can share how careTalk might help on shift or in oversight. The feedback block fills the section horizontally (role choices in a row; form + device notes side-by-side on wider screens). **Send feedback** posts through a mail-forwarding service straight to **pd3rvr@icloud.com** (no device mail app). A copy is also saved in this browser. The first live submission may require a one-time FormSubmit confirmation email to that inbox.
+On the [project landing page](https://0001ama-caretalk-demo.static.hf.space/#feedback), care assistants and supervisors can share how careTalk might help on shift or in oversight. **Send feedback** posts through a mail-forwarding service straight to **pd3rvr@icloud.com** (no device mail app). The first live submission may require a one-time FormSubmit confirmation email to that inbox.
 
 ### Subscribe for updates (v1.1.9)
 

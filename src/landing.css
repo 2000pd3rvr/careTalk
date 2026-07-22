@@ -547,14 +547,8 @@ a {
   display: grid;
   gap: 2rem;
   width: 100%;
+  max-width: min(52rem, 100%);
   align-items: start;
-}
-
-@media (min-width: 900px) {
-  .feedback-layout {
-    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
-    gap: 2.5rem 2.75rem;
-  }
 }
 
 .feedback-form {
@@ -705,71 +699,9 @@ a {
   color: #9b2c2c;
 }
 
-.feedback-wall-wrap {
-  margin: 0;
-  padding: 1.35rem 1.4rem;
-  border: 1px solid var(--line);
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.78);
-  min-width: 0;
-  width: 100%;
-}
-
-@media (max-width: 899px) {
-  .feedback-wall-wrap {
-    padding-top: 1.5rem;
-    border-radius: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    background: transparent;
-  }
-}
-
-.feedback-wall-title {
-  margin: 0;
-  font-family: var(--display);
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
-}
-
 .feedback-wall-empty {
   margin: 0.65rem 0 0;
   color: var(--muted);
-}
-
-.feedback-wall {
-  margin-top: 1.15rem;
-  display: grid;
-  gap: 1rem;
-}
-
-.feedback-item {
-  padding: 0 0 1rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.feedback-item:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.feedback-meta {
-  margin: 0;
-  color: var(--accent-deep);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.feedback-body {
-  margin: 0.35rem 0 0;
-  color: var(--ink);
-}
-
-.feedback-who {
-  margin: 0.35rem 0 0;
-  color: var(--muted);
-  font-size: 0.9rem;
 }
 
 .site-footer {

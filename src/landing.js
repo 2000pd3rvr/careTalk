@@ -25,45 +25,10 @@ function writeFeedback(list) {
   localStorage.setItem(FEEDBACK_KEY, JSON.stringify(list.slice(0, 40)));
 }
 
-function escapeHtml(s) {
-  return String(s || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
 function roleLabel(value) {
   if (value === "assistant") return "Care assistant / support worker";
   if (value === "supervisor") return "Supervisor / manager / nurse";
   return "Other / interested visitor";
-}
-
-function renderWall(list) {
-  const wall = document.getElementById("feedbackWall");
-  const empty = document.getElementById("feedbackWallEmpty");
-  if (!wall) return;
-
-  const items = list.slice(0, 8);
-  wall.innerHTML = items
-    .map((item) => {
-      const when = item.at
-        ? new Date(item.at).toLocaleDateString("en-GB", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-          })
-        : "";
-      const who = [item.name, item.org].filter(Boolean).join(" · ");
-      return `<article class="feedback-item">
-        <p class="feedback-meta">${escapeHtml(roleLabel(item.role))}${when ? ` · ${escapeHtml(when)}` : ""}</p>
-        <p class="feedback-body">${escapeHtml(item.message)}</p>
-        ${who ? `<p class="feedback-who">${escapeHtml(who)}</p>` : ""}
-      </article>`;
-    })
-    .join("");
-
-  if (empty) empty.hidden = items.length > 0;
 }
 
 /** Fields posted to the mail forwarder (also used as email body content). */
@@ -91,8 +56,6 @@ function initFeedbackForm() {
   const status = document.getElementById("feedbackStatus");
   const submitBtn = form?.querySelector('button[type="submit"]');
   if (!form) return;
-
-  renderWall(readFeedback());
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -148,28 +111,25 @@ function initFeedbackForm() {
     }
 
     if (!result.ok) {
-      // Still keep a local copy so the note isn’t lost on this device
+      // Keep a local backup if email send fails
       const list = [entry, ...readFeedback()];
       writeFeedback(list);
-      renderWall(list);
       setFeedbackStatus(status, {
         ok: false,
         text:
           result.error?.includes("confirm") || result.error?.includes("Activation")
             ? "Almost there — check pd3rvr@icloud.com for a one-time FormSubmit confirmation, then send again."
-            : `Saved on this device, but email send failed (${result.error || "unknown error"}). Please try again.`,
+            : `Email send failed (${result.error || "unknown error"}). Please try again.`,
       });
       return;
     }
 
-    const list = [entry, ...readFeedback()];
-    writeFeedback(list);
-    renderWall(list);
+    writeFeedback([entry, ...readFeedback()]);
     form.reset();
 
     setFeedbackStatus(status, {
       ok: true,
-      text: "Thanks — your feedback was emailed to the careTalk inbox and saved on this device.",
+      text: "Thanks — your feedback was emailed to the careTalk inbox.",
     });
   });
 }

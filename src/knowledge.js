@@ -10,7 +10,7 @@ import { visualsForAdvice } from "./visualGuides.js";
 export const DON_META = {
   name: "careTalk",
   fullName: "careTalk",
-  version: "1.1.11",
+  version: "1.1.12",
   tagline: "Speech-to-text care notes · custom training · live webhooks",
   disclaimer:
     "careTalk supports record-keeping and safe practice reminders. Follow your home’s policy, escalate to the nurse in charge, and call 999 in an emergency.",
