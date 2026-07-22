@@ -166,7 +166,23 @@ function initSubscribeForm() {
   });
 }
 
+function initHeroSlides() {
+  const slides = [...document.querySelectorAll(".hero-slide")];
+  if (slides.length < 2) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let index = slides.findIndex((el) => el.classList.contains("is-active"));
+  if (index < 0) index = 0;
+
+  window.setInterval(() => {
+    slides[index].classList.remove("is-active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("is-active");
+  }, 6200);
+}
+
 if (typeof document !== "undefined") {
+  initHeroSlides();
   initSubscribeForm();
   initFeedbackForm();
 }

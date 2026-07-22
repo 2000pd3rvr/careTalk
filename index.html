@@ -31,6 +31,7 @@
         <span class="brand-name">careTalk</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
+        <a class="nav-about" href="#spotlight">Spotlight</a>
         <a class="nav-about" href="#how">How it works</a>
         <a class="nav-about" href="#subscribe">Updates</a>
         <a class="nav-about" href="#feedback">Feedback</a>
@@ -41,7 +42,28 @@
     <main>
       <section class="hero" aria-label="Introduction">
         <div class="hero-media" aria-hidden="true">
-          <img src="/hero-care.svg" alt="" width="1440" height="900" />
+          <img
+            class="hero-slide is-active"
+            src="/images/hero-voice-nurse.jpg"
+            alt=""
+            width="612"
+            height="408"
+            fetchpriority="high"
+          />
+          <img
+            class="hero-slide"
+            src="/images/care-team-handover.jpg"
+            alt=""
+            width="1600"
+            height="1067"
+          />
+          <img
+            class="hero-slide"
+            src="/images/carer-with-resident.jpg"
+            alt=""
+            width="1600"
+            height="1067"
+          />
         </div>
         <div class="hero-scrim" aria-hidden="true"></div>
         <div class="hero-copy">
@@ -54,8 +76,59 @@
           </p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="./app.html">Try the live demo</a>
+            <a class="btn btn-ghost" href="#spotlight">See the moments</a>
           </div>
-          <p class="version-pill">Version 1.1.12</p>
+          <p class="version-pill">Version 1.1.13</p>
+        </div>
+      </section>
+
+      <section class="section spotlight-band" id="spotlight" aria-labelledby="spotlight-title">
+        <div class="section-inner">
+          <h2 id="spotlight-title">Care in the moment</h2>
+          <p class="lede">
+            Voice notes on the floor, calm handover with the team, and time with the person you support — the moments careTalk is built around.
+          </p>
+        </div>
+        <div class="photo-rail" role="region" aria-label="Care photography spotlight">
+          <figure class="photo-tile">
+            <img
+              src="/images/hero-voice-nurse.jpg"
+              alt="Male nurse in scrubs recording a voice message on a smartphone"
+              width="612"
+              height="408"
+              loading="lazy"
+            />
+            <figcaption>
+              <strong>Speak on shift</strong>
+              <span>Capture what happened while it’s fresh — hands free for care.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-tile">
+            <img
+              src="/images/care-team-handover.jpg"
+              alt="Care professionals reviewing notes together during a team handover"
+              width="1600"
+              height="1067"
+              loading="lazy"
+            />
+            <figcaption>
+              <strong>Handover ready</strong>
+              <span>Clear notes for managers, nurses, and the next shift.</span>
+            </figcaption>
+          </figure>
+          <figure class="photo-tile">
+            <img
+              src="/images/carer-with-resident.jpg"
+              alt="Carer sitting with an older resident, offering attentive support"
+              width="1600"
+              height="1067"
+              loading="lazy"
+            />
+            <figcaption>
+              <strong>Stay with the person</strong>
+              <span>Less form-filling in the moment — more attention where it matters.</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -106,7 +179,16 @@
           <p class="lede">
             Share careTalk with managers and support workers who need practical help in the moment — not another heavy clinical system.
           </p>
-          <div class="split">
+          <div class="split split-with-photo">
+            <figure class="section-photo">
+              <img
+                src="/images/carer-with-resident.jpg"
+                alt="Carer offering calm, attentive support beside a resident"
+                width="1600"
+                height="1067"
+                loading="lazy"
+              />
+            </figure>
             <div>
               <h3 class="sr-only">For support workers</h3>
               <ul class="feature-list">
@@ -118,11 +200,6 @@
                   <strong>Voice notes &amp; live reports</strong>
                   <span>Build a report as you speak — ready for handover, the agency, or live supervisor webhooks.</span>
                 </li>
-              </ul>
-            </div>
-            <div>
-              <h3 class="sr-only">For managers and nurses</h3>
-              <ul class="feature-list">
                 <li>
                   <strong>For managers, nurses &amp; supervisors</strong>
                   <span>Review reports by category, approve registrations, and watch live webhook updates as carers create records on site.</span>
@@ -139,26 +216,39 @@
 
       <section class="section band" id="how" aria-labelledby="how-title">
         <div class="section-inner">
-          <h2 id="how-title">How a home can try it</h2>
-          <p class="lede">No install required for the web demo. Use Chrome or Edge and allow the microphone when prompted.</p>
-          <ol class="steps">
-            <li>
-              <strong>Open the demo</strong>
-              <p>Start on Sign in / Register. Use the test admin if you only want a quick look.</p>
-            </li>
-            <li>
-              <strong>Talk through a scenario</strong>
-              <p>Try a fall, swallow concern, or wellbeing note — careTalk guides the next safe step and the write-up.</p>
-            </li>
-            <li>
-              <strong>Review as a manager</strong>
-              <p>Open Reports and Give careTalk more knowledge to see how oversight and local training fit together.</p>
-            </li>
-          </ol>
-          <p class="privacy-note">
-            Data stays on the device (browser storage) unless you configure agency email or webhook forwarding.
-            careTalk supports documentation and reminders — it does not replace clinical assessment, your policies, or calling <strong>999</strong> in an emergency.
-          </p>
+          <div class="split split-with-photo split-photo-end">
+            <div>
+              <h2 id="how-title">How a home can try it</h2>
+              <p class="lede">No install required for the web demo. Use Chrome or Edge and allow the microphone when prompted.</p>
+              <ol class="steps">
+                <li>
+                  <strong>Open the demo</strong>
+                  <p>Start on Sign in / Register. Use the test admin if you only want a quick look.</p>
+                </li>
+                <li>
+                  <strong>Talk through a scenario</strong>
+                  <p>Try a fall, swallow concern, or wellbeing note — careTalk guides the next safe step and the write-up.</p>
+                </li>
+                <li>
+                  <strong>Review as a manager</strong>
+                  <p>Open Reports and Give careTalk more knowledge to see how oversight and local training fit together.</p>
+                </li>
+              </ol>
+              <p class="privacy-note">
+                Data stays on the device (browser storage) unless you configure agency email or webhook forwarding.
+                careTalk supports documentation and reminders — it does not replace clinical assessment, your policies, or calling <strong>999</strong> in an emergency.
+              </p>
+            </div>
+            <figure class="section-photo">
+              <img
+                src="/images/care-team-handover.jpg"
+                alt="Care team reviewing documentation together"
+                width="1600"
+                height="1067"
+                loading="lazy"
+              />
+            </figure>
+          </div>
         </div>
       </section>
 
@@ -246,7 +336,7 @@
     <footer class="site-footer">
       <div class="section-inner footer-row">
         <div>
-          <p>careTalk v1.1.12 · MIT</p>
+          <p>careTalk v1.1.13 · MIT</p>
           <p>
             <a href="./app.html">App</a>
             ·

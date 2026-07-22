@@ -25,7 +25,13 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["icons/favicon.png", "hero-care.svg"],
+      includeAssets: [
+        "icons/favicon.png",
+        "hero-care.svg",
+        "images/hero-voice-nurse.jpg",
+        "images/care-team-handover.jpg",
+        "images/carer-with-resident.jpg",
+      ],
       manifest: {
         name: "careTalk",
         short_name: "careTalk",
@@ -60,8 +66,8 @@ export default defineConfig({
       workbox: {
         // Do not precache HTML — always fetch pages from the network so
         // demos pick up new releases (hashed JS/CSS still precached).
-        cacheId: "caretalk-v1.1.12",
-        globPatterns: ["**/*.{js,css,ico,png,svg,woff2}"],
+        cacheId: "caretalk-v1.1.13",
+        globPatterns: ["**/*.{js,css,ico,png,svg,jpg,jpeg,woff2}"],
         navigateFallback: null,
       },
     }),
