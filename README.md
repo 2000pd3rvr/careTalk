@@ -1,18 +1,20 @@
 ---
 title: careTalk
 emoji: 🏥
-colorFrom: green
-colorTo: blue
+colorFrom: blue
+colorTo: indigo
 sdk: static
 app_file: index.html
 pinned: false
 license: mit
-short_description: Using AI to transform how care workers document
+short_description: Speech-to-text care notes with custom training & live webhooks
 ---
 
 # careTalk
 
-**careTalk** is a browser-based digital head nurse for UK adult social care. Support workers talk (or type) to get safety reminders, guided documentation questions, and agency-ready reports — with manager/admin tools to approve users, review reports, and teach careTalk home-specific knowledge.
+**careTalk** is a speech-to-text care assistant for UK adult social care. It learns your home’s **custom care training and documentation**, then turns carers’ **informal speech** into clear notes for **record-keeping**. Live **webhooks** let supervisors receive and view on-site information as carers create records.
+
+Support workers talk (or type) to get safety reminders, guided documentation questions, and agency-ready reports — with manager tools to approve users, review reports, and teach careTalk home-specific knowledge.
 
 > Not a clinical system of record. Follow your home’s policy, escalate to the nurse in charge, and call **999** in an emergency.
 
@@ -20,9 +22,9 @@ short_description: Using AI to transform how care workers document
 
 ## Live demo
 
-**Version:** 1.1.5 — *Using AI to transform how care workers document*
+**Version:** 1.1.6 — *Speech-to-text care notes · custom training · live supervisor webhooks*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.5** both host the identical release.
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.6** both host the identical release.
 
 | Space | Role | Links |
 |---|---|---|
@@ -31,11 +33,11 @@ There are **two** Hugging Face Spaces (same static build). The first attempt (`c
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
 
-### Feedback (v1.1.5)
+### Feedback (v1.1.6)
 
 On the [project landing page](https://0001ama-caretalk-demo.static.hf.space/#feedback), care assistants and supervisors can share how careTalk might help on shift or in oversight. Notes are saved on the device and open a GitHub feedback draft.
 
-### Subscribe for updates (v1.1.5)
+### Subscribe for updates (v1.1.6)
 
 Visitors can join an updates list on the landing page ([#subscribe](https://0001ama-caretalk-demo.static.hf.space/#subscribe)). Addresses are stored in browser `localStorage` on that device. A discreet lock icon in the footer opens a private updates admin screen (`admin.html`) to review / export the list — credentials are not published here.
 
@@ -49,6 +51,15 @@ Visitors can join an updates list on the landing page ([#subscribe](https://0001
 ---
 
 ## What careTalk does
+
+### Speech → documentation
+- Capture **informal speech** from carers on the floor (or typed notes)
+- Translate it into **relevant documentation** suited to care-record keeping
+- Learn **custom training** and home-specific guidance so wording and prompts match how your service works
+
+### Live supervisor visibility
+- Configure agency **email / webhook** forwarding
+- Supervisors can receive and view **near real-time** information as carers create records on site
 
 ### For support workers — **Talk to careTalk**
 - Say **“Hi careTalk”** (or legacy **“Hi Don”**) to wake the assistant
@@ -72,6 +83,9 @@ Visitors can join an updates list on the landing page ([#subscribe](https://0001
 
 | Area | Details |
 |---|---|
+| Speech → notes | Informal carer speech translated into relevant documentation for record-keeping |
+| Custom training | Learns home-specific care training and guidance (web, URL, or typed knowledge) |
+| Live webhooks | Supervisors can receive near real-time updates as carers create records on site |
 | Voice | UK English speech recognition + TTS; turn-taking so careTalk does not talk over you |
 | Documentation | Scenario playbooks (fall, dysphagia, distress, medication, skin, wellbeing, general) |
 | Reports | Pinned / live / agency outbox reports from carers **and** admins on the same device |

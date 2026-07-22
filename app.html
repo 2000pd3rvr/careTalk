@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#1a6b66" />
-    <meta name="description" content="careTalk — using AI to transform how care workers document." />
+    <meta name="theme-color" content="#1e3a5f" />
+    <meta name="description" content="careTalk — speech-to-text care notes that learn custom training and turn informal speech into documentation for record-keeping." />
     <meta name="apple-mobile-web-app-title" content="careTalk" />
     <link rel="icon" type="image/png" href="/icons/favicon.png" />
     <title>careTalk — Speak the care. Keep the notes.</title>
@@ -24,7 +24,7 @@
           if (!isDemo) return;
           sessionStorage.removeItem("don.session.userId");
           sessionStorage.removeItem("don.train.authed");
-          var appVer = "1.1.5";
+          var appVer = "1.1.6";
           var flag = "don.demo.appVer";
           if (localStorage.getItem(flag) === appVer) return;
           localStorage.setItem(flag, appVer);
@@ -55,7 +55,7 @@
         <div class="gate-brand">
           <div class="avatar" aria-hidden="true">C</div>
           <h1 id="userAuthTitle">careTalk</h1>
-          <p class="tag tag-theme">Using AI to transform how care workers document</p>
+          <p class="tag tag-theme">Speech-to-text care notes · custom training · live webhooks</p>
           <p class="tag">Registered users only</p>
         </div>
         <div class="user-auth-tabs" role="tablist">
@@ -129,7 +129,7 @@
         <div class="gate-brand">
           <div class="avatar" aria-hidden="true">C</div>
           <h1 id="gateTitle">careTalk</h1>
-          <p class="tag">Using AI to transform how care workers document</p>
+          <p class="tag">Speech-to-text care notes · custom training · live webhooks</p>
         </div>
         <div class="gate-session" id="gateSession">
           <p class="hint" id="gateUserLine">Sign in required</p>

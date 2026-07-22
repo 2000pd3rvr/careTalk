@@ -29,9 +29,9 @@ export default defineConfig({
       manifest: {
         name: "careTalk",
         short_name: "careTalk",
-        description: "Using AI to transform how care workers document",
-        theme_color: "#1a6b66",
-        background_color: "#f3f6f5",
+        description: "Speech-to-text care notes with custom training and live supervisor webhooks",
+        theme_color: "#1e3a5f",
+        background_color: "#f4f7fb",
         display: "standalone",
         orientation: "portrait-primary",
         start_url: "./app.html",
@@ -60,7 +60,7 @@ export default defineConfig({
       workbox: {
         // Do not precache HTML — always fetch pages from the network so
         // demos pick up new releases (hashed JS/CSS still precached).
-        cacheId: "caretalk-v1.1.5",
+        cacheId: "caretalk-v1.1.6",
         globPatterns: ["**/*.{js,css,ico,png,svg,woff2}"],
         navigateFallback: null,
       },

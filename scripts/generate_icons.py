@@ -7,10 +7,10 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "public" / "icons"
 OUT.mkdir(parents=True, exist_ok=True)
 
-BG = (6, 17, 20, 255)
-TEAL = (29, 107, 99, 255)
-FOAM = (201, 255, 240, 255)
-MINT = (125, 240, 200, 255)
+BG = (10, 20, 36, 255)
+NAVY = (30, 58, 95, 255)
+FOAM = (232, 238, 246, 255)
+SKY = (123, 168, 220, 255)
 AMBER = (240, 179, 90, 255)
 
 
@@ -21,7 +21,7 @@ def make_icon(size: int) -> Image.Image:
     d.rounded_rectangle(
         [pad, pad, size - pad, size - pad],
         radius=size * 0.22,
-        fill=TEAL,
+        fill=NAVY,
     )
     # mic body
     cx, cy = size / 2, size / 2 - size * 0.04
@@ -37,10 +37,10 @@ def make_icon(size: int) -> Image.Image:
         [cx - size * 0.18, cy - size * 0.02, cx + size * 0.18, cy + size * 0.28],
         start=0,
         end=180,
-        fill=MINT,
+        fill=SKY,
         width=stroke,
     )
-    d.line([(cx, cy + size * 0.28), (cx, cy + size * 0.36)], fill=MINT, width=stroke)
+    d.line([(cx, cy + size * 0.28), (cx, cy + size * 0.36)], fill=SKY, width=stroke)
     d.line(
         [(cx - size * 0.1, cy + size * 0.36), (cx + size * 0.1, cy + size * 0.36)],
         fill=AMBER,
