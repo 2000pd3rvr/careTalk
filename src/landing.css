@@ -1,12 +1,12 @@
 :root {
-  --bg: #f4f9ff;
-  --bg-deep: #dceaf8;
-  --ink: #1a3555;
-  --muted: #5c7d9e;
-  --line: rgba(42, 110, 187, 0.18);
-  --accent: #3b82d6;
-  --accent-deep: #2563b8;
-  --accent-rgb: 59, 130, 214;
+  --bg: #f3f6f5;
+  --bg-deep: #dde6e3;
+  --ink: #1a2c2a;
+  --muted: #5a6f6b;
+  --line: rgba(26, 90, 86, 0.16);
+  --accent: #1a6b66;
+  --accent-deep: #145552;
+  --accent-rgb: 26, 107, 102;
   --panel: #ffffff;
   --font: "Source Sans 3", system-ui, sans-serif;
   --display: "Fraunces", Georgia, serif;
@@ -67,7 +67,7 @@ a {
   font-weight: 700;
   font-size: 1.2rem;
   color: #fff;
-  background: linear-gradient(145deg, #7eb8f0, #3b82d6);
+  background: linear-gradient(145deg, #4a9e98, #1a6b66);
   box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.16);
 }
 
@@ -118,11 +118,11 @@ a {
 .btn-primary {
   background: var(--accent-deep);
   color: #fff;
-  box-shadow: 0 10px 24px rgba(37, 99, 184, 0.28);
+  box-shadow: 0 10px 24px rgba(20, 85, 82, 0.28);
 }
 
 .btn-primary:hover {
-  background: #1d4f96;
+  background: #0f4441;
 }
 
 .btn-ghost {
@@ -165,8 +165,8 @@ a {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(244, 249, 255, 0.94) 0%, rgba(244, 249, 255, 0.78) 42%, rgba(244, 249, 255, 0.18) 72%, rgba(244, 249, 255, 0.05) 100%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(220, 234, 248, 0.55) 100%);
+    linear-gradient(90deg, rgba(243, 246, 245, 0.95) 0%, rgba(243, 246, 245, 0.8) 42%, rgba(243, 246, 245, 0.18) 72%, rgba(243, 246, 245, 0.05) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(221, 230, 227, 0.55) 100%);
   z-index: 1;
 }
 
@@ -188,14 +188,26 @@ a {
   color: var(--ink);
 }
 
+.hero-theme {
+  margin: 0 0 0.75rem;
+  max-width: 22ch;
+  font-family: var(--display);
+  font-size: clamp(1.55rem, 3.6vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: var(--accent-deep);
+}
+
 .hero-headline {
   margin: 0;
-  max-width: 18ch;
-  font-family: var(--display);
-  font-size: clamp(1.45rem, 3.2vw, 2.05rem);
-  font-weight: 550;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  max-width: 28ch;
+  font-family: var(--font);
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
 }
 
 .hero-lede {

@@ -1,13 +1,13 @@
 ---
 title: careTalk
 emoji: 🏥
-colorFrom: blue
-colorTo: indigo
+colorFrom: green
+colorTo: blue
 sdk: static
 app_file: index.html
 pinned: false
 license: mit
-short_description: Digital head nurse for adult care — voice guidance & reports
+short_description: Using AI to transform how care workers document
 ---
 
 # careTalk
@@ -20,9 +20,9 @@ short_description: Digital head nurse for adult care — voice guidance & report
 
 ## Live demo
 
-**Version:** 1.1.4
+**Version:** 1.1.5 — *Using AI to transform how care workers document*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.4** both host the identical release.
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.5** both host the identical release.
 
 | Space | Role | Links |
 |---|---|---|
@@ -31,11 +31,11 @@ There are **two** Hugging Face Spaces (same static build). The first attempt (`c
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
 
-### Feedback (v1.1.4)
+### Feedback (v1.1.5)
 
 On the [project landing page](https://0001ama-caretalk-demo.static.hf.space/#feedback), care assistants and supervisors can share how careTalk might help on shift or in oversight. Notes are saved on the device and open a GitHub feedback draft.
 
-### Subscribe for updates (v1.1.4)
+### Subscribe for updates (v1.1.5)
 
 Visitors can join an updates list on the landing page ([#subscribe](https://0001ama-caretalk-demo.static.hf.space/#subscribe)). Addresses are stored in browser `localStorage` on that device. A discreet lock icon in the footer opens a private updates admin screen (`admin.html`) to review / export the list — credentials are not published here.
 

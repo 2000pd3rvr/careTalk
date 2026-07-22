@@ -29,9 +29,9 @@ export default defineConfig({
       manifest: {
         name: "careTalk",
         short_name: "careTalk",
-        description: "Digital head nurse for adult care documentation and guidance",
-        theme_color: "#3b82d6",
-        background_color: "#f4f9ff",
+        description: "Using AI to transform how care workers document",
+        theme_color: "#1a6b66",
+        background_color: "#f3f6f5",
         display: "standalone",
         orientation: "portrait-primary",
         start_url: "./app.html",
@@ -60,7 +60,7 @@ export default defineConfig({
       workbox: {
         // Do not precache HTML — always fetch pages from the network so
         // demos pick up new releases (hashed JS/CSS still precached).
-        cacheId: "caretalk-v1.1.4",
+        cacheId: "caretalk-v1.1.5",
         globPatterns: ["**/*.{js,css,ico,png,svg,woff2}"],
         navigateFallback: null,
       },

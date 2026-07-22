@@ -1,22 +1,22 @@
 :root {
-  --bg: #f4f9ff;
-  --bg-deep: #e3f0fc;
+  --bg: #f3f6f5;
+  --bg-deep: #dde6e3;
   --panel: #ffffff;
-  --ink: #1a3555;
-  --muted: #5c7d9e;
-  --line: rgba(42, 110, 187, 0.18);
-  --don: #2563b8;
-  --user: #1d5fa8;
-  --accent: #3b82d6;
-  --accent-rgb: 59, 130, 214;
+  --ink: #1a2c2a;
+  --muted: #5a6f6b;
+  --line: rgba(26, 90, 86, 0.16);
+  --don: #145552;
+  --user: #1a6b66;
+  --accent: #1a6b66;
+  --accent-rgb: 26, 107, 102;
   --accent-soft: rgba(var(--accent-rgb), 0.12);
   --accent-border: rgba(var(--accent-rgb), 0.38);
-  --user-bubble-bg: #e8f3ff;
+  --user-bubble-bg: #e7f1ef;
   --user-bubble-border: rgba(var(--accent-rgb), 0.22);
-  --surface-inset: #e9f3fc;
+  --surface-inset: #e8efec;
   --input-bg: #ffffff;
-  --shadow: rgba(30, 80, 140, 0.12);
-  --shadow-strong: rgba(30, 80, 140, 0.18);
+  --shadow: rgba(20, 60, 55, 0.12);
+  --shadow-strong: rgba(20, 60, 55, 0.18);
   --warn: #c77d2a;
   --warn-soft: rgba(199, 125, 42, 0.15);
   --font: "Source Sans 3", system-ui, sans-serif;
@@ -65,7 +65,7 @@ body {
   font-weight: 700;
   font-size: 1.35rem;
   color: #ffffff;
-  background: linear-gradient(145deg, #7eb8f0, #3b82d6);
+  background: linear-gradient(145deg, #4a9e98, #1a6b66);
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
@@ -80,6 +80,17 @@ h1 {
   margin: 0.1rem 0 0;
   color: var(--muted);
   font-size: 0.88rem;
+}
+
+.tag-theme {
+  margin-top: 0.45rem;
+  color: var(--accent-deep);
+  font-family: var(--display);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  max-width: 28ch;
 }
 
 .you {
