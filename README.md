@@ -7,14 +7,16 @@ sdk: static
 app_file: index.html
 pinned: false
 license: mit
-short_description: AI book-keeping for health assistants & admins
+short_description: AI-assisted voice documentation for care teams
 ---
 
 # careTalk
 
-**careTalk** uses artificial intelligence to improve book-keeping for health assistants and admins. It learns your home’s **custom care training and documentation**, then turns carers’ **informal speech** into clear notes for **record-keeping**. Live **webhooks** let supervisors receive and view on-site information as carers create records.
+**careTalk** is a **rules-led, AI-assisted care-documentation prototype** for UK adult social care. It learns your home’s **custom care training and documentation**, then turns **spoken observations** into **structured draft notes for staff review and approval**. Live **webhooks** let supervisors receive and view on-site information as draft records are created.
 
-Support workers talk (or type) to get safety reminders, guided documentation questions, and agency-ready reports — with manager tools to approve users, review reports, and teach careTalk home-specific knowledge.
+> **Demonstration only.** Do not enter real names, health information or identifiable resident details. This is not a live care-record system.
+
+Support workers talk (or type) to get safety reminders, guided documentation questions, and agency-ready **draft** reports — with manager tools to approve users, review reports, and teach careTalk home-specific knowledge. Conversational replies use a rules-led dialogue engine, with an optional local Ollama model when available.
 
 > Follow your home’s policy, escalate to the nurse in charge, and call **999** in an emergency.
 
@@ -22,9 +24,9 @@ Support workers talk (or type) to get safety reminders, guided documentation que
 
 ## Live demo
 
-**Version:** 1.1.17 — *AI book-keeping positioning · Landing hero video playlist (Pexels) · light/dark theme · speech-to-text care notes · training · webhooks*
+**Version:** 1.1.18 — *Demo trust: permanent demo banner · one-tap support-worker/manager demos · draft-for-review wording · no “book-keeping” positioning*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.17**).
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.18**).
 
 | Space | Role | Links |
 |---|---|---|
@@ -32,6 +34,10 @@ There are **two** Hugging Face Spaces (same static build). The first attempt (`c
 | **careTalk** (mirror) | Same build | [Space](https://huggingface.co/spaces/0001AMA/careTalk) · [site](https://0001ama-caretalk.static.hf.space/) · [app](https://0001ama-caretalk.static.hf.space/app.html) |
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
+
+### Positioning & demo trust (v1.1.18)
+
+Landing and app now frame careTalk as **AI-assisted voice documentation for care teams** (not “book-keeping”). The public prototype shows a permanent **Demonstration only** banner, one-tap **Try as support worker** / **Try as manager** fictional roles, and labels generated notes as **drafts for staff review**.
 
 ### Positioning (v1.1.17)
 

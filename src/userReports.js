@@ -132,20 +132,24 @@ export function getActiveLiveReportId(userId = getCurrentUser()?.id) {
 function rebuildLiveReportBody(doc) {
   const chunks = Array.isArray(doc.liveChunks) ? doc.liveChunks : [];
   const person = doc.person || "—";
-  const statusLabel = doc.status === "draft" ? "IN PROGRESS — UPDATES AS YOU SPEAK" : "FINAL";
+  const statusLabel =
+    doc.status === "draft"
+      ? "IN PROGRESS — UPDATES AS YOU SPEAK"
+      : "DRAFT SAVED — STAFF REVIEW REQUIRED";
   const lines = [
-    "LIVE SUPPORT WORKER REPORT — careTalk",
+    "LIVE SUPPORT WORKER REPORT — careTalk (demonstration draft)",
     "================================",
     `Status: ${statusLabel}`,
+    "Notice: Generated wording is a draft for staff review — not an approved care record.",
     `Carer: ${doc.userName || "—"}`,
-    `Service user: ${person}`,
+    `Service user (fictional in public demo): ${person}`,
     `Started: ${doc.createdAt ? new Date(doc.createdAt).toLocaleString("en-GB") : "—"}`,
     `Last updated: ${doc.updatedAt ? new Date(doc.updatedAt).toLocaleString("en-GB") : "—"}`,
   ];
   if (doc.scenarioLabel) lines.push(`Topic: ${doc.scenarioLabel}`);
   if (doc.sessionId) lines.push(`Session: ${doc.sessionId}`);
 
-  lines.push("", "VOICE CAPTURE (LIVE)", "");
+  lines.push("", "WHAT I HEARD (VERBATIM VOICE CAPTURE)", "");
   if (chunks.length) {
     chunks.forEach((c, i) => {
       const t = c.at ? new Date(c.at).toLocaleTimeString("en-GB") : "";
@@ -156,15 +160,15 @@ function rebuildLiveReportBody(doc) {
   }
 
   if (doc.structuredSummary) {
-    lines.push("", "STRUCTURED (AUTO)", doc.structuredSummary);
+    lines.push("", "DRAFT STRUCTURED NOTE (AUTO — REVIEW BEFORE APPROVAL)", doc.structuredSummary);
   }
 
   if (doc.structuredAnswers?.length) {
-    lines.push("", "CONFIRMED RECORD LINES", ...doc.structuredAnswers);
+    lines.push("", "CONFIRMED DRAFT LINES (STAFF STILL REVIEW)", ...doc.structuredAnswers);
   }
 
   if (doc.finalAgencyReport) {
-    lines.push("", "AGENCY REPORT (FINAL)", doc.finalAgencyReport);
+    lines.push("", "AGENCY DRAFT REPORT (REVIEW BEFORE SEND)", doc.finalAgencyReport);
   }
 
   return lines.join("\n");

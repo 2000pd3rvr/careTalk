@@ -73,7 +73,7 @@ body {
 
 .theme-toggle {
   position: fixed;
-  top: calc(0.75rem + env(safe-area-inset-top));
+  top: calc(3.35rem + env(safe-area-inset-top));
   right: calc(0.75rem + env(safe-area-inset-right));
   z-index: 40;
   width: 2.55rem;
@@ -387,6 +387,47 @@ ul.record-review li {
 
 .hidden {
   display: none !important;
+}
+
+.demo-banner {
+  position: sticky;
+  top: 0;
+  z-index: 35;
+  padding: 0.55rem 0.85rem;
+  text-align: center;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: #5a3d00;
+  background: #ffe8a8;
+  border-bottom: 1px solid #e0c56a;
+}
+
+html[data-theme="dark"] .demo-banner {
+  color: #ffe8b8;
+  background: #3d2e0a;
+  border-bottom-color: #6a5520;
+}
+
+.demo-quick {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0 0 1rem;
+  padding: 0.85rem 0.9rem;
+  border-radius: 14px;
+  border: 1px dashed var(--line);
+  background: var(--accent-soft);
+}
+
+.demo-quick-title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.demo-quick .primary-btn,
+.demo-quick .ghost-btn {
+  width: 100%;
 }
 
 .gate {

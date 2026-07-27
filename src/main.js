@@ -52,6 +52,7 @@ import {
   resetUsersToDefaultAdmin,
   DEFAULT_ADMIN,
   ensureDefaultAdminAccount,
+  enterDemoRole,
 } from "./users.js";
 import {
   matchesPinDocumentIntent,
@@ -115,6 +116,8 @@ const els = {
   btnReports: document.getElementById("btnReports"),
   btnSignOut: document.getElementById("btnSignOut"),
   btnOpenAuth: document.getElementById("btnOpenAuth"),
+  btnDemoCarer: document.getElementById("btnDemoCarer"),
+  btnDemoManager: document.getElementById("btnDemoManager"),
   userAuthBack: document.getElementById("userAuthBack"),
   gateUserLine: document.getElementById("gateUserLine"),
   gateLockHint: document.getElementById("gateLockHint"),
@@ -1302,11 +1305,11 @@ async function finishRecord() {
 
   addBubble(
     "don",
-    `<p>That’s everything. Here’s the <strong>support worker report</strong> — voice notes included.</p>
+    `<p>That’s everything. Here’s the <strong>draft support worker report</strong> for staff review — voice notes included. It is <strong>not</strong> an approved care record until a staff member checks and accepts it.</p>
      <pre class="record">${escapeHtml(record)}</pre>
      <div class="actions">
-       <button type="button" class="primary" data-act="copy">Copy report</button>
-       <button type="button" data-act="forward">Forward to agency again</button>
+       <button type="button" class="primary" data-act="copy">Copy draft report</button>
+       <button type="button" data-act="forward">Forward draft to agency again</button>
        <button type="button" data-act="new">Something else?</button>
      </div>`,
     { speakText: false },
@@ -1321,7 +1324,7 @@ async function finishRecord() {
     ? finalizeLiveReport(snap.liveReportId, record)
     : pinUserReportFromSession(snap, record);
   if (pinned) {
-    toast("Report saved to your profile");
+    toast("Draft report saved for staff review — not an approved care record");
   }
 
   if (agency.autoForward !== false) {
@@ -1931,6 +1934,34 @@ els.btnTrainMode.addEventListener("click", () => {
 });
 els.btnReports?.addEventListener("click", () => enterReports());
 els.btnOpenAuth?.addEventListener("click", () => enterUserAuth({ tab: "signin" }));
+
+function startDemoSession(role) {
+  try {
+    markTrainAuthed(false);
+    const user = enterDemoRole(role);
+    toast(
+      role === "manager"
+        ? "Demo manager — fictional data only. Notes stay drafts for review."
+        : "Demo support worker — fictional data only. Notes stay drafts for review.",
+    );
+    refreshGateSession();
+    if (role === "manager") {
+      pendingMode = "reports";
+      continuePendingMode();
+    } else {
+      pendingMode = "learn";
+      continuePendingMode();
+    }
+    return user;
+  } catch (err) {
+    toast(err?.message || "Could not start demo");
+    return null;
+  }
+}
+
+els.btnDemoCarer?.addEventListener("click", () => startDemoSession("carer"));
+els.btnDemoManager?.addEventListener("click", () => startDemoSession("manager"));
+
 els.userAuthBack?.addEventListener("click", () => {
   pendingMode = null;
   els.signInForm?.reset();
@@ -2537,6 +2568,11 @@ async function boot() {
   if (isPublicDemoHost()) clearDemoSession();
   ensureDefaultPin();
   if (loadUsers().length === 0) ensureDefaultAdminAccount();
+  // Honour #demo deep-link from landing "One-tap demo roles"
+  if (window.location.hash === "#demo") {
+    enterUserAuth({ tab: "signin" });
+    document.getElementById("demoQuick")?.scrollIntoView?.({ behavior: "smooth", block: "center" });
+  }
   const verEl = document.getElementById("appVersion");
   if (verEl) {
     verEl.hidden = false;
@@ -2545,7 +2581,12 @@ async function boot() {
   warmUpVoices();
   window.speechSynthesis?.addEventListener?.("voiceschanged", () => warmUpVoices());
   void refreshLlmStatus();
-  enterGate();
+  if (window.location.hash !== "#demo") enterGate();
+  else {
+    // Still run enterGate routing if already signed in; otherwise stay on auth with demo buttons
+    if (getCurrentUser()) enterGate();
+    else enterUserAuth({ tab: "signin" });
+  }
 }
 
 boot();

@@ -6,12 +6,12 @@
     <meta name="theme-color" content="#1e3a5f" />
     <meta
       name="description"
-      content="Using artificial intelligence to improve book-keeping for health assistants and admins. careTalk learns your home’s custom care training and documentation, then turns informal speech from carers into clear notes for record-keeping. Live webhooks let supervisors receive and view on-site information as records are created."
+      content="Rules-led, AI-assisted care-documentation prototype. careTalk turns spoken observations into structured draft notes for staff review and approval. Live webhooks let supervisors view on-site information as draft records are created. Demonstration only — not a live care-record system."
     />
-    <meta property="og:title" content="careTalk — Speech-to-text care documentation" />
+    <meta property="og:title" content="careTalk — AI-assisted voice documentation for care teams" />
     <meta
       property="og:description"
-      content="Using artificial intelligence to improve book-keeping for health assistants and admins. careTalk turns informal carer speech into clear notes for record-keeping, with live webhooks for supervisors."
+      content="A rules-led, AI-assisted prototype that turns spoken care observations into structured draft notes for staff review. Demonstration only — do not enter real resident details."
     />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/png" href="/icons/favicon.png" />
@@ -99,16 +99,19 @@
         <div class="hero-scrim" aria-hidden="true"></div>
         <div class="hero-copy">
           <p class="hero-brand">careTalk</p>
-          <p class="hero-theme">Speech-to-text care notes · custom training · live webhooks</p>
+          <p class="hero-theme">AI-assisted voice documentation for care teams · draft notes · live webhooks</p>
           <h1 class="hero-headline">Speak the care. Keep the notes.</h1>
           <p class="hero-lede">
-            Using artificial intelligence to improve book-keeping for health assistants and admins. careTalk learns your home’s custom care training and documentation, then turns informal speech from carers into clear notes for record-keeping. Live webhooks let supervisors receive and view on-site information as records are created.
+            A rules-led, AI-assisted care-documentation prototype. careTalk learns your home’s custom care training and documentation, then turns spoken observations into structured draft notes for staff review and approval. Live webhooks let supervisors receive and view on-site information as draft records are created.
+          </p>
+          <p class="hero-demo-banner" role="status">
+            Demonstration only. Do not enter real names, health information or identifiable resident details. Not a live care-record system.
           </p>
           <div class="hero-cta">
             <a class="btn btn-primary" href="./app.html">Try the live demo</a>
-            <a class="btn btn-ghost" href="#spotlight">See the moments</a>
+            <a class="btn btn-ghost" href="./app.html#demo">One-tap demo roles</a>
           </div>
-          <p class="version-pill">Version 1.1.17</p>
+          <p class="version-pill">Version 1.1.18</p>
         </div>
       </section>
 
@@ -253,11 +256,11 @@
               <ol class="steps">
                 <li>
                   <strong>Open the demo</strong>
-                  <p>Start on Sign in / Register. Use the test admin if you only want a quick look.</p>
+                  <p>Use <em>Try as support worker</em> or <em>Try as manager</em> for a one-tap fictional demo — or Sign in / Register if you prefer.</p>
                 </li>
                 <li>
                   <strong>Talk through a scenario</strong>
-                  <p>Try a fall, swallow concern, or wellbeing note — careTalk guides the next safe step and the write-up.</p>
+                  <p>Try a fall, swallow concern, or wellbeing note — careTalk guides the next safe step and a <strong>draft</strong> write-up for staff review.</p>
                 </li>
                 <li>
                   <strong>Review as a manager</strong>
@@ -265,8 +268,9 @@
                 </li>
               </ol>
               <p class="privacy-note">
-                Data stays on the device (browser storage) unless you configure agency email or webhook forwarding.
-                careTalk supports documentation and reminders — it does not replace clinical assessment, your policies, or calling <strong>999</strong> in an emergency.
+                <strong>Demonstration only.</strong> Do not enter real resident details. Data stays on this browser (local storage) unless you configure agency email or webhook forwarding.
+                careTalk produces draft notes for staff review — it does not replace clinical assessment, your policies, or calling <strong>999</strong> in an emergency.
+                Conversational replies use a rules-led dialogue engine, with an optional local Ollama model when available.
               </p>
             </div>
             <figure class="section-photo">
@@ -366,7 +370,7 @@
     <footer class="site-footer">
       <div class="section-inner footer-row">
         <div>
-          <p>careTalk v1.1.17 · MIT</p>
+          <p>careTalk v1.1.18 · MIT</p>
           <p>
             <a href="./app.html">App</a>
             ·

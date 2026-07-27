@@ -10,10 +10,10 @@ import { visualsForAdvice } from "./visualGuides.js";
 export const DON_META = {
   name: "careTalk",
   fullName: "careTalk",
-  version: "1.1.17",
-  tagline: "Speech-to-text care notes · custom training · live webhooks",
+  version: "1.1.18",
+  tagline: "AI-assisted voice documentation · draft notes · live webhooks",
   disclaimer:
-    "careTalk supports record-keeping and safe practice reminders. Follow your home’s policy, escalate to the nurse in charge, and call 999 in an emergency.",
+    "careTalk is a demonstration prototype. Notes are drafts for staff review — not an approved care record. Follow your home’s policy, escalate to the nurse in charge, and call 999 in an emergency.",
 };
 
 /** Training / practice pillars careTalk reasons from (expand later). */

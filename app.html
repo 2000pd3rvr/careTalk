@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#1e3a5f" />
-    <meta name="description" content="careTalk — speech-to-text care notes that learn custom training and turn informal speech into documentation for record-keeping." />
+    <meta name="description" content="careTalk — rules-led, AI-assisted care-documentation prototype. Demonstration only. Turns spoken observations into structured draft notes for staff review." />
     <meta name="apple-mobile-web-app-title" content="careTalk" />
     <link rel="icon" type="image/png" href="/icons/favicon.png" />
     <title>careTalk — Speak the care. Keep the notes.</title>
@@ -35,7 +35,7 @@
           if (!isDemo) return;
           sessionStorage.removeItem("don.session.userId");
           sessionStorage.removeItem("don.train.authed");
-          var appVer = "1.1.17";
+          var appVer = "1.1.18";
           var flag = "don.demo.appVer";
           if (localStorage.getItem(flag) === appVer) return;
           localStorage.setItem(flag, appVer);
@@ -75,14 +75,28 @@
         <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5z" />
       </svg>
     </button>
+    <div class="demo-banner" role="status">
+      <strong>Demonstration only.</strong>
+      Do not enter real names, health information or identifiable resident details.
+      Not a live care-record system — notes are drafts for staff review.
+    </div>
     <!-- Sign in / register (default first screen) -->
     <div class="gate" id="userAuth" role="dialog" aria-labelledby="userAuthTitle">
       <div class="gate-card">
         <div class="gate-brand">
           <div class="avatar" aria-hidden="true">C</div>
           <h1 id="userAuthTitle">careTalk</h1>
-          <p class="tag tag-theme">Speech-to-text care notes · custom training · live webhooks</p>
-          <p class="tag">Registered users only</p>
+          <p class="tag tag-theme">AI-assisted voice documentation · draft notes · live webhooks</p>
+          <p class="tag">Public prototype — fictional demo roles available</p>
+        </div>
+        <div class="demo-quick" id="demoQuick" aria-label="One-tap demonstration">
+          <p class="demo-quick-title">Try without registering</p>
+          <button type="button" class="primary-btn" id="btnDemoCarer">Try as support worker</button>
+          <button type="button" class="ghost-btn" id="btnDemoManager">Try as manager</button>
+          <p class="hint">
+            Opens a demo session with fictional residents only.
+            Generated wording is a <strong>draft</strong> for staff review — not an approved care record.
+          </p>
         </div>
         <div class="user-auth-tabs" role="tablist">
           <button type="button" class="reports-tab active" data-user-auth-tab="signin" aria-selected="true">Sign in</button>
@@ -155,7 +169,7 @@
         <div class="gate-brand">
           <div class="avatar" aria-hidden="true">C</div>
           <h1 id="gateTitle">careTalk</h1>
-          <p class="tag">Speech-to-text care notes · custom training · live webhooks</p>
+          <p class="tag">AI-assisted voice documentation · draft notes · live webhooks</p>
         </div>
         <div class="gate-session" id="gateSession">
           <p class="hint" id="gateUserLine">Sign in required</p>

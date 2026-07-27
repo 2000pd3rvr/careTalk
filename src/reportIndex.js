@@ -28,10 +28,10 @@ function pinnedReportItem(doc) {
   const roleLabel = doc.role === "admin" ? "Admin" : "Carer";
   const kindLabel =
     doc.status === "draft"
-      ? "Live report"
+      ? "Live draft"
       : doc.source === "voice_pin"
-        ? "Pinned note"
-        : "Support report";
+        ? "Pinned draft note"
+        : "Draft support report";
 
   return {
     id: doc.id,

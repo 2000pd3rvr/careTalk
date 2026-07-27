@@ -435,6 +435,85 @@ export const DEFAULT_ADMIN = {
   password: "2473",
 };
 
+/** Fictional one-tap demo accounts (not for real resident data). */
+export const DEMO_CARER = {
+  id: "user_demo_carer",
+  name: "Alex Demo",
+  email: "carer@demo.caretalk.local",
+  role: "carer",
+};
+
+export const DEMO_MANAGER = {
+  id: "user_demo_manager",
+  name: "Jordan Demo",
+  email: "manager@demo.caretalk.local",
+  role: "admin",
+};
+
+function buildDemoUserRow({ id, name, email, role }) {
+  const now = new Date().toISOString();
+  return {
+    id,
+    name,
+    email: email.toLowerCase(),
+    passwordHash: hashSecret(`demo-${id}`),
+    role,
+    requestedRole: role === "admin" ? "admin" : "carer",
+    status: "approved",
+    emailVerified: true,
+    verificationCodeHash: null,
+    verificationExpiresAt: null,
+    createdAt: now,
+    approvedAt: now,
+    approvedBy: "demo_seed",
+    isDemo: true,
+  };
+}
+
+/**
+ * Ensure fictional support-worker and manager demo accounts exist (device-local).
+ * Does not wipe other accounts.
+ */
+export function ensureDemoAccounts() {
+  const seeds = [
+    buildDemoUserRow(DEMO_CARER),
+    buildDemoUserRow(DEMO_MANAGER),
+  ];
+  const list = loadUsers();
+  let changed = false;
+  for (const seed of seeds) {
+    const idx = list.findIndex((u) => u.id === seed.id || u.email === seed.email);
+    if (idx < 0) {
+      list.push(seed);
+      changed = true;
+    } else {
+      list[idx] = {
+        ...list[idx],
+        ...seed,
+        createdAt: list[idx].createdAt || seed.createdAt,
+      };
+      changed = true;
+    }
+  }
+  if (changed) saveUsers(list);
+  return {
+    carer: publicUser(list.find((u) => u.id === DEMO_CARER.id)),
+    manager: publicUser(list.find((u) => u.id === DEMO_MANAGER.id)),
+  };
+}
+
+/**
+ * Sign into a fictional demo role without registration.
+ * @param {"carer"|"manager"} role
+ */
+export function enterDemoRole(role) {
+  const accounts = ensureDemoAccounts();
+  const user = role === "manager" ? accounts.manager : accounts.carer;
+  if (!user) throw new Error("Demo account missing");
+  setCurrentUserId(user.id);
+  return user;
+}
+
 function buildDefaultAdminRow() {
   const now = new Date().toISOString();
   return {

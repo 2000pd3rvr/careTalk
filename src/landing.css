@@ -300,9 +300,22 @@ html[data-theme="dark"] .theme-toggle .theme-icon-sun {
 
 .hero-lede {
   margin: 0.9rem 0 0;
-  max-width: 34ch;
+  max-width: 38ch;
   color: rgba(244, 249, 255, 0.78);
   font-size: 1.08rem;
+}
+
+.hero-demo-banner {
+  margin: 1rem 0 0;
+  max-width: 42ch;
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 210, 120, 0.45);
+  background: rgba(40, 28, 8, 0.55);
+  color: #ffe8b8;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  font-weight: 600;
 }
 
 .hero-cta {
