@@ -35,7 +35,7 @@
           if (!isDemo) return;
           sessionStorage.removeItem("don.session.userId");
           sessionStorage.removeItem("don.train.authed");
-          var appVer = "1.1.18";
+          var appVer = "1.1.19";
           var flag = "don.demo.appVer";
           if (localStorage.getItem(flag) === appVer) return;
           localStorage.setItem(flag, appVer);
@@ -76,9 +76,7 @@
       </svg>
     </button>
     <div class="demo-banner" role="status">
-      <strong>Demonstration only.</strong>
-      Do not enter real names, health information or identifiable resident details.
-      Not a live care-record system — notes are drafts for staff review.
+      Demo to collect feedback.
     </div>
     <!-- Sign in / register (default first screen) -->
     <div class="gate" id="userAuth" role="dialog" aria-labelledby="userAuthTitle">
