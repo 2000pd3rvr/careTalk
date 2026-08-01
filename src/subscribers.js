@@ -3,7 +3,7 @@
  * Password is never stored in plaintext — only a client-side hash is checked.
  */
 
-export const APP_VERSION = "1.1.21";
+export const APP_VERSION = "1.1.22";
 export const SUBSCRIBERS_KEY = "caretalk.landing.subscribers";
 export const ADMIN_SESSION_KEY = "caretalk.updates.authed";
 
