@@ -24,9 +24,9 @@ Support workers talk (or type) to get safety reminders, guided documentation que
 
 ## Live demo
 
-**Version:** 1.1.19 — *Banner shortened to “Demo to collect feedback.”*
+**Version:** 1.1.20 — *Feedback ticker under hero (real form saves from this site/origin)*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.19**).
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.20**).
 
 | Space | Role | Links |
 |---|---|---|
@@ -34,6 +34,10 @@ There are **two** Hugging Face Spaces (same static build). The first attempt (`c
 | **careTalk** (mirror) | Same build | [Space](https://huggingface.co/spaces/0001AMA/careTalk) · [site](https://0001ama-caretalk.static.hf.space/) · [app](https://0001ama-caretalk.static.hf.space/app.html) |
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
+
+### Feedback ticker (v1.1.20)
+
+A slow horizontal preview sits just under the landing hero. It shows **real feedback form submissions** saved on that site (browser `localStorage` for the HF / local origin): message preview, workplace, and name initials. No sample cards. The strip stays hidden until at least one submission exists on that device/origin.
 
 ### Demo banner (v1.1.19)
 

@@ -32,6 +32,87 @@ function roleLabel(value) {
   return "Other / interested visitor";
 }
 
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+/** Initials from a display name; falls back by role when name is blank. */
+export function feedbackInitials(name, role) {
+  const parts = String(name || "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  if (parts.length >= 2) {
+    return `${parts[0][0] || ""}${parts[parts.length - 1][0] || ""}`.toUpperCase();
+  }
+  if (parts.length === 1 && parts[0].length >= 2) {
+    return parts[0].slice(0, 2).toUpperCase();
+  }
+  if (parts.length === 1) return parts[0].slice(0, 1).toUpperCase() || "?";
+  if (role === "assistant") return "CA";
+  if (role === "supervisor") return "SM";
+  return "CT";
+}
+
+function workplaceLabel(org) {
+  const t = String(org || "").trim();
+  return t || "Workplace not shared";
+}
+
+function truncateMessage(message, max = 140) {
+  const t = String(message || "").replace(/\s+/g, " ").trim();
+  if (t.length <= max) return t;
+  return `${t.slice(0, max - 1).trimEnd()}…`;
+}
+
+/** Only real submissions saved by the feedback form (device-local). */
+function feedbackForMarquee() {
+  return readFeedback()
+    .filter((e) => e && String(e.message || "").trim())
+    .slice(0, 24);
+}
+
+function feedbackCardHtml(entry) {
+  const initials = feedbackInitials(entry.name, entry.role);
+  const workplace = workplaceLabel(entry.org);
+  const role = roleLabel(entry.role);
+  const message = truncateMessage(entry.message);
+  return `<article class="feedback-card" aria-label="Feedback from ${escapeHtml(initials)} at ${escapeHtml(workplace)}">
+    <div class="feedback-card-initials" aria-hidden="true">${escapeHtml(initials)}</div>
+    <div class="feedback-card-meta">
+      <p class="feedback-card-workplace">${escapeHtml(workplace)}</p>
+      <p class="feedback-card-role">${escapeHtml(role)}</p>
+    </div>
+    <p class="feedback-card-message">${escapeHtml(message)}</p>
+  </article>`;
+}
+
+function renderFeedbackMarquee() {
+  const root = document.getElementById("feedbackMarquee");
+  const track = document.getElementById("feedbackMarqueeTrack");
+  if (!root || !track) return;
+
+  const items = feedbackForMarquee();
+  if (!items.length) {
+    root.hidden = true;
+    track.innerHTML = "";
+    track.classList.remove("is-looping");
+    return;
+  }
+
+  const row = items.map(feedbackCardHtml).join("");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Duplicate for seamless horizontal loop (CSS translates -50%).
+  const canLoop = !reduceMotion && items.length >= 1;
+  track.innerHTML = canLoop ? `${row}${row}` : row;
+  track.classList.toggle("is-looping", canLoop);
+  root.hidden = false;
+}
+
 /** Fields posted to the mail forwarder (also used as email body content). */
 export function buildFeedbackMailFields(entry) {
   return {
@@ -115,6 +196,7 @@ function initFeedbackForm() {
       // Keep a local backup if email send fails
       const list = [entry, ...readFeedback()];
       writeFeedback(list);
+      renderFeedbackMarquee();
       setFeedbackStatus(status, {
         ok: false,
         text:
@@ -126,6 +208,7 @@ function initFeedbackForm() {
     }
 
     writeFeedback([entry, ...readFeedback()]);
+    renderFeedbackMarquee();
     form.reset();
 
     setFeedbackStatus(status, {
@@ -248,4 +331,5 @@ if (typeof document !== "undefined") {
   initHeroVideo();
   initSubscribeForm();
   initFeedbackForm();
+  renderFeedbackMarquee();
 }
