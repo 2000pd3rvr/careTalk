@@ -10,7 +10,7 @@ import { visualsForAdvice } from "./visualGuides.js";
 export const DON_META = {
   name: "careTalk",
   fullName: "careTalk",
-  version: "1.1.20",
+  version: "1.1.21",
   tagline: "AI-assisted voice documentation · draft notes · live webhooks",
   disclaimer:
     "careTalk is a demonstration prototype. Notes are drafts for staff review — not an approved care record. Follow your home’s policy, escalate to the nurse in charge, and call 999 in an emergency.",

@@ -7,6 +7,12 @@ import {
 } from "./subscribers.js";
 import { FEEDBACK_EMAIL, forwardMail } from "./mailForward.js";
 import { initTheme } from "./theme.js";
+import {
+  fetchDeployedFeedbackFeed,
+  fetchSharedFeedbackFeed,
+  mergeFeedbackLists,
+  publishFeedbackToSharedFeed,
+} from "./feedbackFeed.js";
 
 const FEEDBACK_KEY = "caretalk.landing.feedback";
 
@@ -69,11 +75,13 @@ function truncateMessage(message, max = 140) {
   return `${t.slice(0, max - 1).trimEnd()}…`;
 }
 
-/** Only real submissions saved by the feedback form (device-local). */
-function feedbackForMarquee() {
-  return readFeedback()
-    .filter((e) => e && String(e.message || "").trim())
-    .slice(0, 24);
+/** Shared feed (all visitors) + this browser's form saves. */
+async function feedbackForMarquee() {
+  const [shared, deployed] = await Promise.all([
+    fetchSharedFeedbackFeed(),
+    fetchDeployedFeedbackFeed(),
+  ]);
+  return mergeFeedbackLists(shared, deployed, readFeedback()).slice(0, 24);
 }
 
 function feedbackCardHtml(entry) {
@@ -91,12 +99,12 @@ function feedbackCardHtml(entry) {
   </article>`;
 }
 
-function renderFeedbackMarquee() {
+async function renderFeedbackMarquee() {
   const root = document.getElementById("feedbackMarquee");
   const track = document.getElementById("feedbackMarqueeTrack");
   if (!root || !track) return;
 
-  const items = feedbackForMarquee();
+  const items = await feedbackForMarquee();
   if (!items.length) {
     root.hidden = true;
     track.innerHTML = "";
@@ -111,6 +119,12 @@ function renderFeedbackMarquee() {
   track.innerHTML = canLoop ? `${row}${row}` : row;
   track.classList.toggle("is-looping", canLoop);
   root.hidden = false;
+}
+
+async function persistFeedbackEntry(entry) {
+  writeFeedback([entry, ...readFeedback()]);
+  await publishFeedbackToSharedFeed(entry);
+  await renderFeedbackMarquee();
 }
 
 /** Fields posted to the mail forwarder (also used as email body content). */
@@ -193,10 +207,8 @@ function initFeedbackForm() {
     }
 
     if (!result.ok) {
-      // Keep a local backup if email send fails
-      const list = [entry, ...readFeedback()];
-      writeFeedback(list);
-      renderFeedbackMarquee();
+      // Still keep the note locally + on the shared ticker feed
+      await persistFeedbackEntry(entry);
       setFeedbackStatus(status, {
         ok: false,
         text:
@@ -207,8 +219,7 @@ function initFeedbackForm() {
       return;
     }
 
-    writeFeedback([entry, ...readFeedback()]);
-    renderFeedbackMarquee();
+    await persistFeedbackEntry(entry);
     form.reset();
 
     setFeedbackStatus(status, {

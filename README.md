@@ -24,9 +24,9 @@ Support workers talk (or type) to get safety reminders, guided documentation que
 
 ## Live demo
 
-**Version:** 1.1.20 — *Feedback ticker under hero (real form saves from this site/origin)*
+**Version:** 1.1.21 — *Shared feedback ticker (FormSubmit inbox + public feed for all visitors)*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.20**).
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.21**).
 
 | Space | Role | Links |
 |---|---|---|
@@ -34,6 +34,10 @@ There are **two** Hugging Face Spaces (same static build). The first attempt (`c
 | **careTalk** (mirror) | Same build | [Space](https://huggingface.co/spaces/0001AMA/careTalk) · [site](https://0001ama-caretalk.static.hf.space/) · [app](https://0001ama-caretalk.static.hf.space/app.html) |
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
+
+### Shared feedback ticker (v1.1.21)
+
+FormSubmit still emails every submission to the careTalk inbox. New submissions are also published to a **shared public feed**, so the landing ticker shows the same notes for every visitor (name initials, workplace, message) — not only the browser that submitted. Older emails can be backfilled into `public/feedback-feed.json`.
 
 ### Feedback ticker (v1.1.20)
 
