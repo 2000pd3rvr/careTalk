@@ -24,9 +24,9 @@ Support workers talk (or type) to get safety reminders, guided documentation que
 
 ## Live demo
 
-**Version:** 1.1.24 — *Backfill Mary Nsaidoo-Storph + William FormSubmit notes*
+**Version:** 1.1.25 — *Backfill Mary Nsaidoo-Storph + William FormSubmit notes*
 
-There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.24**).
+There are **two** Hugging Face Spaces (same static build). The first attempt (`careTalk`) briefly used a HF build step that needs paid credits and stuck on **CONFIG_ERROR**; `careTalk-demo` is the clean prebuilt Space. From **v1.1.9** both host the identical release (current: **v1.1.25**).
 
 | Space | Role | Links |
 |---|---|---|
@@ -35,7 +35,7 @@ There are **two** Hugging Face Spaces (same static build). The first attempt (`c
 
 Use **Chrome** or **Edge** for microphone / speech recognition. Allow mic when prompted. Prefer the **direct app URL** if the Space iframe blocks the mic. Data stays **on the device** (browser `localStorage`) unless you configure agency email/webhook forwarding.
 
-### Shared feedback ticker (v1.1.24)
+### Shared feedback ticker (v1.1.25)
 
 FormSubmit still emails every submission to the careTalk inbox. New submissions are also published to a **shared public feed**, so the landing ticker shows the same notes for every visitor (name initials, workplace, message) — not only the browser that submitted. Older emails can be backfilled into `public/feedback-feed.json`.
 
