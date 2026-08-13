@@ -50,4 +50,5 @@ else:
         about_title="About careTalk",
         about_md=ABOUT,
         site_root=SITE,
+        asset_cdn="https://cdn.jsdelivr.net/gh/2000pd3rvr/careTalk@main/site",
     )
