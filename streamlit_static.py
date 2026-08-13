@@ -397,6 +397,50 @@ def hide_streamlit_chrome() -> None:
     )
 
 
+def _query_page(default: str) -> str:
+    """Read ?page= across Streamlit query-param API variants."""
+    import streamlit as st
+
+    raw = None
+    try:
+        qp = st.query_params
+        raw = qp.get("page", default) if hasattr(qp, "get") else qp["page"]
+    except Exception:
+        try:
+            raw = (st.experimental_get_query_params() or {}).get("page", [default])
+        except Exception:
+            raw = default
+    if isinstance(raw, (list, tuple)):
+        raw = raw[0] if raw else default
+    page = str(raw or default).strip().lower()
+    return page or default
+
+
+def _embed_html(html: str, height: int) -> None:
+    """Embed HTML in a way that works on both older and newer Streamlit Cloud."""
+    import streamlit as st
+
+    # Streamlit ≥1.56 prefers st.iframe for HTML strings (no scrolling= kwarg).
+    if hasattr(st, "iframe"):
+        try:
+            st.iframe(html, height=int(height), width="stretch")
+            return
+        except TypeError:
+            try:
+                st.iframe(html, height=int(height))
+                return
+            except Exception:
+                pass
+
+    import streamlit.components.v1 as components
+
+    try:
+        components.html(html, height=int(height), scrolling=True)
+    except TypeError:
+        # Newer wrappers may reject scrolling=
+        components.html(html, height=int(height))
+
+
 def render_live_site(
     html_path: Path,
     *,
@@ -406,9 +450,9 @@ def render_live_site(
     site_root: Path | None = None,
     page_routes: dict[str, str] | None = None,
     asset_cdn: str | None = None,
+    **_extra: object,
 ) -> None:
     import streamlit as st
-    import streamlit.components.v1 as components
 
     hide_streamlit_chrome()
     html = build_standalone_html(
@@ -417,7 +461,7 @@ def render_live_site(
         page_routes=page_routes,
         asset_cdn=asset_cdn,
     )
-    components.html(html, height=height, scrolling=True)
+    _embed_html(html, height)
     if about_md:
         with st.expander(about_title, expanded=False):
             st.markdown(about_md)
@@ -432,11 +476,10 @@ def render_multipage_site(
     about_md: str = "",
     site_root: Path | None = None,
     asset_cdn: str | None = None,
+    **_extra: object,
 ) -> None:
     """pages: query key -> html path (home->index.html, app->app.html)."""
-    import streamlit as st
-
-    page = (st.query_params.get("page") or default).strip().lower()
+    page = _query_page(default)
     if page not in pages:
         page = default
     routes = {path.name: key for key, path in pages.items()}
