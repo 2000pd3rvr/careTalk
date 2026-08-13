@@ -1,91 +1,44 @@
 #!/usr/bin/env python3
-"""careTalk — Streamlit Community Cloud app (GitHub-connected)."""
+"""careTalk — live app on Streamlit Community Cloud."""
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import streamlit as st
-import streamlit.components.v1 as components
+
+from streamlit_static import render_live_site
+
+ROOT = Path(__file__).resolve().parent
+SITE = ROOT / "site"
+if (SITE / "app.html").is_file():
+    HTML = SITE / "app.html"
+elif (SITE / "index.html").is_file():
+    HTML = SITE / "index.html"
+else:
+    HTML = ROOT / "index.html"
 
 st.set_page_config(
     page_title="careTalk · Deborah Akuoko Minka",
     page_icon="🏥",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
-HF_URL = "https://huggingface.co/spaces/0001AMA/careTalk"
-HF_EMBED = "https://0001AMA-careTalk.hf.space"
-GH_URL = "https://github.com/2000pd3rvr/careTalk"
-WP_URL = "https://deborahakuokominka.wordpress.com/"
-ORCID = "https://orcid.org/0009-0008-6219-154X"
-SCHOLAR = "https://scholar.google.co.uk/citations?hl=en&user=ab0EyjYAAAAJ"
+ABOUT = """
+**careTalk** turns spoken or typed observations into structured draft care notes for staff review.
 
-st.title("careTalk")
-st.subheader("Structured care notes for health assistants and admins")
-st.caption("Deborah Akuoko Minka · Deborah Akuoko-Minka")
+- **Live on Streamlit:** this page
+- **Source:** [github.com/2000pd3rvr/careTalk](https://github.com/2000pd3rvr/careTalk)
+- **Also on Hugging Face:** [0001AMA/careTalk](https://huggingface.co/spaces/0001AMA/careTalk)
+- **Author:** Deborah Akuoko Minka / Deborah Akuoko-Minka
+- [Research site](https://deborahakuokominka.wordpress.com/) · [ORCID](https://orcid.org/0009-0008-6219-154X)
 
-b1, b2, b3, b4 = st.columns(4)
-b1.link_button("Live demo", HF_URL, use_container_width=True)
-b2.link_button("Source on GitHub", GH_URL, use_container_width=True)
-b3.link_button("Research site", WP_URL, use_container_width=True)
-b4.link_button("ORCID", ORCID, use_container_width=True)
+Demonstration only — do not enter real resident details.
+"""
 
-st.markdown("---")
-left, right = st.columns([1.25, 1])
-
-with left:
-    st.header("What it is")
-    st.write(
-        "careTalk helps health assistants and admins turn spoken or typed notes into "
-        "clearer, structured care records. The interface is built for everyday clinical "
-        "admin work rather than research notebooks — short flows, plain language, and "
-        "a layout that stays usable on a phone or tablet during a shift."
-    )
-
-    st.header("What you can do")
-    st.markdown(
-        """
-- Capture care notes with a simple, guided interface
-- Keep bookkeeping and admin tasks in one place
-- Use a lightweight static client that loads quickly on shared devices
-- Open the same project from GitHub when you want to inspect or extend it
-        """
-    )
-
-    st.header("Who it is for")
-    st.write(
-        "Care assistants, ward admins, and people evaluating small digital tools for "
-        "health documentation. It is also a useful reference for researchers looking "
-        "at practical interfaces around sparse clinical text."
-    )
-
-    st.header("How it is built")
-    st.markdown(
-        f"""
-- **Live app:** [Hugging Face Space — 0001AMA/careTalk]({HF_URL})
-- **Source:** [{GH_URL}]({GH_URL})
-- **Stack:** Vite static frontend, published as a Space and mirrored from GitHub
-- **Author:** Deborah Akuoko Minka (also written Deborah Akuoko-Minka)
-        """
-    )
-
-    st.header("Related links")
-    st.markdown(
-        f"""
-- [WordPress research site]({WP_URL})
-- [ORCID]({ORCID})
-- [Google Scholar]({SCHOLAR})
-- Demo Space: [0001AMA/careTalk-demo](https://huggingface.co/spaces/0001AMA/careTalk-demo)
-        """
-    )
-
-with right:
-    st.header("Preview")
-    st.write("Embedded view of the live Space. If the frame is empty, open the live demo link above.")
-    components.iframe(HF_EMBED, height=720, scrolling=True)
-
-st.markdown("---")
-st.caption(
-    "Deborah Akuoko Minka · machine intelligence and applied interfaces · "
-    f"[deborahakuokominka.wordpress.com]({WP_URL})"
-)
+if not HTML.is_file():
+    st.error("careTalk UI files are missing from this deployment.")
+    st.markdown(ABOUT)
+else:
+    render_live_site(HTML, height=960, about_title="About careTalk", about_md=ABOUT)
